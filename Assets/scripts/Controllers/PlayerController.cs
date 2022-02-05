@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public NavMeshAgent playerNavt;
     public Camera cam;
 
+    
+
     // Start is called before the first frame update
     void Update()
     {
@@ -20,17 +22,11 @@ public class PlayerController : MonoBehaviour
             {
                 playerNavt.SetDestination(destino.point);
             }
-        }
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        //foreach (ContactPoint contact in other.contacts)
-        //{
-            Debug.Log("Estoy en el area de " + other.tag);
-            //Debug.Log(contact);
-        //}
+        }       
+        
     }
 
+   
         // Update is called once per frame
         /*void FixedUpdate()
         {
