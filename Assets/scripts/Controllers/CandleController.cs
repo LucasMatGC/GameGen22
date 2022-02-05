@@ -5,29 +5,20 @@ using UnityEngine;
 public class CandleController : MonoBehaviour
 {
     public bool velaEncendida = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public void encenderVela()
+    
+    public void encenderVela(float tiempoDeEncendido)
     {
         if (velaEncendida == false)
         {
             velaEncendida = true;
-            StartCoroutine(MyCoroutine());
+            StartCoroutine(MyCoroutine(tiempoDeEncendido));
         }
     
     }
 
-    IEnumerator MyCoroutine()
+    IEnumerator MyCoroutine(float tiempoDeEncendido)
     {
+        yield return new WaitForSeconds(tiempoDeEncendido);
         Debug.Log("Vela encendida");
         var rand = new System.Random();
         int time = rand.Next(7, 13);
