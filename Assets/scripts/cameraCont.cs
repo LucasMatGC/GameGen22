@@ -17,6 +17,6 @@ public class cameraCont : MonoBehaviour
     {
         Vector3 posicionPer = personajeGO.transform.position;
         //Vector3 posicionCam = camaraGO.transform.position;
-        camaraGO.transform.position = new Vector3(posicionPer.x, posicionPer.y+5, posicionPer.z-5);
+        camaraGO.transform.position = new Vector3(posicionPer.x-3, posicionPer.y+5, posicionPer.z-3);
     }
 }
