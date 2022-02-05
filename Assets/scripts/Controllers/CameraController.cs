@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraCont : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     public GameObject personajeGO;
     public float MovementSpeed = 5f;

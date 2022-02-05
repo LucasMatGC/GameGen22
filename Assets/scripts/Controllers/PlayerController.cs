@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class charCont : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float vel = 6f;
     public NavMeshAgent playerNavt;
@@ -22,13 +22,13 @@ public class charCont : MonoBehaviour
             }
         }
     }
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            Debug.Log("Estoy en el area de ");
-            Debug.Log(contact);
-        }
+        //foreach (ContactPoint contact in other.contacts)
+        //{
+            Debug.Log("Estoy en el area de " + other.tag);
+            //Debug.Log(contact);
+        //}
     }
 
         // Update is called once per frame
