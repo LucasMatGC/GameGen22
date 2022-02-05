@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Book
+  - Altar
+  - Talk
+  - Relic
+  - Pison
+  - Candle
   layers:
   - Default
   - TransparentFX
