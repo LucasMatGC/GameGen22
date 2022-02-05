@@ -12,7 +12,7 @@ public class charCont : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Movement"))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit destino;
@@ -22,13 +22,21 @@ public class charCont : MonoBehaviour
             }
         }
     }
-
-    // Update is called once per frame
-    /*void FixedUpdate()
+    void OnCollisionEnter(Collision collision)
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        Vector3 move = new Vector3(x, 0, y);
-        personajeCont.Move(move * Time.deltaTime * vel);
-    }*/
-}
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            Debug.Log("Estoy en el area de ");
+            Debug.Log(contact);
+        }
+    }
+
+        // Update is called once per frame
+        /*void FixedUpdate()
+        {
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+            Vector3 move = new Vector3(x, 0, y);
+            personajeCont.Move(move * Time.deltaTime * vel);
+        }*/
+    }

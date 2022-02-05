@@ -5,18 +5,18 @@ using UnityEngine;
 public class cameraCont : MonoBehaviour
 {
     public GameObject personajeGO;
+    public float MovementSpeed = 5f;
     public GameObject camaraGO;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    private void Start()
+    {
+        camaraGO.transform.rotation = Quaternion.Euler(35,35,0);
+    }
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         Vector3 posicionPer = personajeGO.transform.position;
-        //Vector3 posicionCam = camaraGO.transform.position;
-        camaraGO.transform.position = new Vector3(posicionPer.x-3, posicionPer.y+5, posicionPer.z-3);
+        Vector3 newPos = new Vector3(posicionPer.x - 5, posicionPer.y + 5, posicionPer.z - 5);
+        camaraGO.transform.position = Vector3.Lerp(camaraGO.transform.position, newPos, MovementSpeed * Time.deltaTime);
     }
 }
