@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class PrayController : MonoBehaviour
 {
-    public bool ocupado = false;
+    public bool busy = false;
 
-    public void rezar(float reserva)
+    public void pray(float booking)
     {
-        if (ocupado == false)
+        if (busy == false)
         {
-            ocupado = true;
-            StartCoroutine(MyCoroutine(reserva));
+            busy = true;
+            StartCoroutine(MyCoroutine(booking));
         }
 
     }
 
-    IEnumerator MyCoroutine(float reserva)
+    IEnumerator MyCoroutine(float booking)
     {
         Debug.Log("Rezando");
-        yield return new WaitForSeconds(reserva);
+        yield return new WaitForSeconds(booking);
         Debug.Log("Accion terminada");
-        ocupado = false;
+        busy = false;
     }
 }

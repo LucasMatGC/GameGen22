@@ -5,160 +5,173 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     public GameObject player;
+    public GameObject camera;
 
-    bool encendedor = false;
+    public float cameraMovementSpeed = 5f;
+
+    string task = "";
+    bool doingTask = false;
+    int dontYouDare = 0;
+
     Collider encendedorCollider;
-
-    bool rezar = false;
     Collider rezarCollider;
-
-    bool libro = false;
     Collider leerCollider;
-
-    bool reliquia = false;
     Collider reliquiaCollider;
 
     void Update()
     {
-        if(encendedor == true && Input.GetButtonDown("Action"))
+
+        if (Input.GetButtonDown("Action"))
         {
-            if (!encendedorCollider.gameObject.GetComponent<CandleController>().velaEncendida)
+            switch (task)
             {
-                StartCoroutine(encendiendoVela(encendedorCollider));
-            }
-            else
-            {
-                Debug.Log("La vela ya esta encendida, tienes que esperar a que se apague :(");
-            }
+                case "lighter":
+                    if (!encendedorCollider.gameObject.GetComponent<CandleController>().busy)
+                    {
+                        StartCoroutine(startAction(task, encendedorCollider));
+                    }
+                    else
+                    {
+                        Debug.Log("La vela ya esta encendida, tienes que esperar a que se apague :(");
+                    }
+                    break;
+
+                case "altar":
+                    if (!rezarCollider.gameObject.GetComponent<PrayController>().busy)
+                    {
+                        StartCoroutine(startAction(task, rezarCollider));
+                    }
+                    else
+                    {
+                        Debug.Log("Ya hay alguien rezando, espera a que este libre");
+                    }
+                    break;
+
+                case "book":
+                    if (!leerCollider.gameObject.GetComponent<TableController>().busy)
+                    {
+                        StartCoroutine(startAction(task, leerCollider));
+                    }
+                    else
+                    {
+                        Debug.Log("Ya hay alguien leyendo en este sitio, espera a que este libre o busca otro");
+                    }
+                    break;
+
+                case "relic":
+                    if (!reliquiaCollider.gameObject.GetComponent<RelicController>().busy)
+                    {
+                        StartCoroutine(startAction(task, reliquiaCollider));
+                    }
+                    else
+                    {
+                        Debug.Log("Ya hay alguien leyendo en este sitio, espera a que este libre o busca otro");
+                    }
+                    break;
+
+                default:
+                    StartCoroutine(startAction("sweep", null));
+                    break;
+            }           
+            
         }
-        else if (rezar == true && Input.GetButtonDown("Action"))
+        //________________________________Zoom in camera__________________________________________
+        if (doingTask)
         {
-            if (!rezarCollider.gameObject.GetComponent<PrayController>().ocupado)
-            {
-                StartCoroutine(rezando(rezarCollider));
-            }
-            else
-            {
-                Debug.Log("Ya hay alguien rezando, espera a que este libre");
-            }
+            //Rotation
+            Quaternion newRotation = Quaternion.Euler(50, 45, 0);
+            camera.transform.rotation = Quaternion.Lerp(camera.transform.rotation, newRotation, cameraMovementSpeed * Time.deltaTime);
+            //Position
+            Vector3 posicionPer = player.transform.position;
+            Vector3 newPos = new Vector3(posicionPer.x - 1, posicionPer.y + 2.3f, posicionPer.z - 1);
+            camera.transform.position = Vector3.Lerp(camera.transform.position, newPos, cameraMovementSpeed * Time.deltaTime);
         }
-        else if (libro == true && Input.GetButtonDown("Action"))
-        {
-            if (!leerCollider.gameObject.GetComponent<TableController>().ocupado)
-            {
-                StartCoroutine(leer(leerCollider));
-            }
-            else
-            {
-                Debug.Log("Ya hay alguien leyendo en este sitio, espera a que este libre o busca otro");
-            }
-        }
-        else if (reliquia == true && Input.GetButtonDown("Action"))
-        {
-            if (!reliquiaCollider.gameObject.GetComponent<RelicController>().ocupado)
-            {
-                StartCoroutine(verReliquia(reliquiaCollider));
-            }
-            else
-            {
-                Debug.Log("Ya hay alguien leyendo en este sitio, espera a que este libre o busca otro");
-            }
-        }
-        else if (Input.GetButtonDown("Action"))
-        {
-            StartCoroutine(barrer());
-        }
+
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Lighter1")
+        if (!task.Equals(""))
         {
-            encendedor = true;
-            encendedorCollider = other;
+            dontYouDare++;
         }
-        else if (other.name == "PrayingArea")
+        switch (other.gameObject.layer)
         {
-            rezar = true;
-            rezarCollider = other;
+            case 7:
+                task = "lighter";
+                encendedorCollider = other;
+                break;
+            case 9:
+                task = "altar";
+                rezarCollider = other;
+                break;
+            case 8:
+                task = "book";
+                leerCollider = other;
+                break;
+            case 10:
+                task = "relic";
+                reliquiaCollider = other;
+                break;
         }
-        else if (other.name == "Book")
-        {
-            libro = true;
-            leerCollider = other;
-        }
-        else if (other.name == "WatchingArea")
-        {
-            reliquia = true;
-            reliquiaCollider = other;
-        }
-
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.name == "Lighter1")
+        if (dontYouDare == 0)
         {
-            encendedor = false;
+            int layerExit = other.gameObject.layer;
+            if (7 <= layerExit && layerExit <= 10)
+            {
+                task = "";
+            }
         }
-        else if (other.name == "PrayingArea")
+        else
         {
-            rezar = false;
-        }
-        else if (other.name == "Book")
-        {
-            libro = false;
-        }
-        else if (other.name == "WatchingArea")
-        {
-            reliquia = false;
-        }
+            dontYouDare--;
+        }       
     }
 
-    IEnumerator encendiendoVela(Collider other)
+    IEnumerator startAction(string currentTask, Collider other)
     {
-        Debug.Log("Encendiendo... vela");
-        float tiempoDeEncendido = 5f;
+        doingTask = true;
         player.GetComponent<PlayerController>().enabled = false;
-        other.gameObject.GetComponent<CandleController>().encenderVela(tiempoDeEncendido);
-        yield return new WaitForSeconds(tiempoDeEncendido); 
+        camera.GetComponent<CameraController>().enabled = false;
+        float actionTime = 0f;
+        switch (currentTask)
+        {
+            case "lighter":
+                Debug.Log("Encendiendo... vela");
+                actionTime = 5f;
+                other.gameObject.GetComponent<CandleController>().lightCandle(actionTime);
+                break;
+            case "altar":
+                Debug.Log("Rezando...");
+                actionTime = 5f;        
+                other.gameObject.GetComponent<PrayController>().pray(actionTime);
+                break;
+            case "book":
+                Debug.Log("Leyendo...");
+                actionTime = 5f;
+                other.gameObject.GetComponent<TableController>().read(actionTime);
+                break;
+            case "relic":
+                Debug.Log("Viendo la reliquia...");
+                actionTime = 5f;
+                other.gameObject.GetComponent<RelicController>().watch(actionTime);
+                break;
+            case "sweep":
+                Debug.Log("Barriendo...");
+                actionTime = 5f;                
+                break;
+        }
+        yield return new WaitForSeconds(actionTime);
+        camera.GetComponent<CameraController>().enabled = true;
         player.GetComponent<PlayerController>().enabled = true;
+        doingTask = false;
     }
-    IEnumerator rezando(Collider other)
-    {
-        Debug.Log("Rezando...");
-        float tiempoRezando = 5f;
-        player.GetComponent<PlayerController>().enabled = false;
-        other.gameObject.GetComponent<PrayController>().rezar(tiempoRezando);
-        yield return new WaitForSeconds(tiempoRezando);
-        player.GetComponent<PlayerController>().enabled = true;
-    }
-    IEnumerator barrer()
-    {
-        Debug.Log("Barriendo...");
-        float tiempoBarriendo = 5f;
-        player.GetComponent<PlayerController>().enabled = false;
-        yield return new WaitForSeconds(tiempoBarriendo);
-        player.GetComponent<PlayerController>().enabled = true;
-    }
-    IEnumerator leer(Collider other)
-    {
-        Debug.Log("Leyendo...");
-        float tiempoLeyendo = 5f;
-        player.GetComponent<PlayerController>().enabled = false;
-        other.gameObject.GetComponent<TableController>().leer(tiempoLeyendo);
-        yield return new WaitForSeconds(tiempoLeyendo);
-        player.GetComponent<PlayerController>().enabled = true;
-    }
-    IEnumerator verReliquia(Collider other)
-    {
-        Debug.Log("Viendo la reliquia...");
-        float tiempoViendo = 5f;
-        player.GetComponent<PlayerController>().enabled = false;
-        other.gameObject.GetComponent<RelicController>().ver(tiempoViendo);
-        yield return new WaitForSeconds(tiempoViendo);
-        player.GetComponent<PlayerController>().enabled = true;
-    }
+          
+
 
 }
 
