@@ -27,15 +27,27 @@ public class ActionsMaster : MonoBehaviour
         if (first <= second)
         {
             second++;
+            if (first <= therd)
+            {
+                therd++;
+            }
+            if (second <= therd)
+            {
+                therd++;
+            }
         }
-        if (first <= therd)
+        else
         {
-            therd++;
+            if (first <= therd)
+            {
+                therd++;
+            }
+            if (second <= therd)
+            {
+                therd++;
+            }
         }
-        if (second <= therd)
-        {
-            therd++;
-        }
+        
         selectedActions[0] = actions[first];
         selectedActions[1] = actions[second];
         selectedActions[2] = actions[therd];

@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public NavMeshAgent playerNavt;
     public Camera cam;
 
-    
+
 
     // Start is called before the first frame update
     void Update()
@@ -22,9 +22,9 @@ public class PlayerController : MonoBehaviour
             {
                 playerNavt.SetDestination(destino.point);
             }
-        }       
+        }   
         
     }
 
    
-    }
+}
