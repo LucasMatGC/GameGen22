@@ -492,6 +492,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735082049cce2514b83cf0efb327d892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tables: {fileID: 1740717769}
+  pray: {fileID: 1925097205}
+  candles: {fileID: 1994658511}
+  relic: {fileID: 477666471}
 --- !u!1 &650638996
 GameObject:
   m_ObjectHideFlags: 0
