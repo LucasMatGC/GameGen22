@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Repeat
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: e37bfc8a2b7af334cafeb1a6108bc586
   position: {x: -22, y: 8}
   blackboard:
@@ -21,8 +21,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 80
+    secondTaskTime: 80
+    thirdTaskTime: 80
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: 0, y: 0, z: 0}
+    AltarPosition: {x: 0, y: 0, z: 0}
+    CandlePosition: {x: 0, y: 0, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   child: {fileID: -5660333016957678146}
@@ -41,7 +51,7 @@ MonoBehaviour:
   m_Name: Sequencer
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 74a286b60eaf8ea45b9bd84db9ce177b
   position: {x: -22, y: 118}
   blackboard:
@@ -49,8 +59,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 80
+    secondTaskTime: 80
+    thirdTaskTime: 80
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: 0, y: 0, z: 0}
+    AltarPosition: {x: 0, y: 0, z: 0}
+    CandlePosition: {x: 0, y: 0, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   children:
@@ -78,8 +98,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 80
+    secondTaskTime: 80
+    thirdTaskTime: 80
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: 0, y: 0, z: 0}
+    AltarPosition: {x: 0, y: 0, z: 0}
+    CandlePosition: {x: 0, y: 0, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   duration: 1
@@ -104,8 +134,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 80
+    secondTaskTime: 80
+    thirdTaskTime: 80
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: 0, y: 0, z: 0}
+    AltarPosition: {x: 0, y: 0, z: 0}
+    CandlePosition: {x: 0, y: 0, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   speed: 5
@@ -139,8 +179,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 80
+    secondTaskTime: 80
+    thirdTaskTime: 80
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: 0, y: 0, z: 0}
+    AltarPosition: {x: 0, y: 0, z: 0}
+    CandlePosition: {x: 0, y: 0, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4300890025194573056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +204,7 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: ca00e6aa7ca72c144ae99d826e0d13e4
   position: {x: -22, y: -102}
   blackboard:
@@ -162,8 +212,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 80
+    secondTaskTime: 80
+    thirdTaskTime: 80
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: 0, y: 0, z: 0}
+    AltarPosition: {x: 0, y: 0, z: 0}
+    CandlePosition: {x: 0, y: 0, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   child: {fileID: -8754077107127582826}
@@ -179,17 +239,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a055ff4bd9e6642b3f0dff32a86e1d, type: 3}
   m_Name: RandomPosition
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: e8b7b3236babb5b45a8c128a30261cab
   position: {x: -194, y: 289}
   blackboard:
-    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToPosition: {x: 19.678707, y: 0, z: -2.8117924}
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 80
+    secondTaskTime: 80
+    thirdTaskTime: 80
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: 0, y: 0, z: 0}
+    AltarPosition: {x: 0, y: 0, z: 0}
+    CandlePosition: {x: 0, y: 0, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   min: {x: -20, y: -20}

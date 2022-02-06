@@ -41,10 +41,25 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
+  timeOnTask: 0
+  taskTime: 5
+  threshold: 1
+  isExecuting: 0
+  tolerance: 1
 --- !u!114 &-1264524319666839463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,10 +81,24 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
+  timeOnTask: 0
+  taskTime: 5
+  isExecuting: 0
+  tolerance: 1
 --- !u!114 &-807531404510567604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,8 +120,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   children:
@@ -119,8 +158,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   child: {fileID: -807531404510567604}
@@ -147,8 +196,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 80
+    secondTaskTime: 80
+    thirdTaskTime: 80
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   child: {fileID: 0}
@@ -183,8 +242,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &2525073319750078487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,10 +275,25 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
+  timeOnTask: 0
+  taskTime: 5
+  threshold: 1
+  isExecuting: 0
+  tolerance: 1
 --- !u!114 &3655070851547443892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,10 +315,24 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
+  timeOnTask: 0
+  taskTime: 5
+  isExecuting: 0
+  tolerance: 1
 --- !u!114 &4184237831892142841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,10 +354,24 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
+  timeOnTask: 0
+  taskTime: 5
+  isExecuting: 0
+  tolerance: 1
 --- !u!114 &4929898307141290732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,8 +393,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   child: {fileID: -570782146807142941}
@@ -307,8 +429,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   children:
@@ -339,11 +471,20 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  maxTime: 80
   baseThreshold: 0.15
 --- !u!114 &8914775837839096510
 MonoBehaviour:
@@ -366,8 +507,18 @@ MonoBehaviour:
     firstThreshold: 0
     secondThreshold: 0
     thirdThreshold: 0
+    firstTaskTime: 0
+    secondTaskTime: 0
+    thirdTaskTime: 0
+    maxTime: 80
     probability: 0
     priorityTask: 0
+    Tasks: []
+    BookPosition: {x: -65.66, y: 42.07, z: 0}
+    AltarPosition: {x: -68.59, y: -12.69, z: 0}
+    CandlePosition: {x: -59.31, y: 38.08, z: 0}
+    PoisonPosition: {x: 0, y: 0, z: 0}
+    RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   duration: 1

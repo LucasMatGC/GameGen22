@@ -9,7 +9,7 @@ public class MoveToPosition : ActionNode
     public float stoppingDistance = 0.1f;
     public bool updateRotation = true;
     public float acceleration = 40.0f;
-    public float tolerance = 1.0f;
+    public float tolerance = 0.0f;
 
     protected override void OnStart() {
         context.agent.stoppingDistance = stoppingDistance;
