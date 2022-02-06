@@ -12,6 +12,8 @@ public class FirstTask : ActionNode
 
     public float tolerance = 0.01f;
 
+    private Vector3? destination = null;
+
     protected override void OnStart() {
 
         timeOnTask = 0f;
@@ -27,18 +29,39 @@ public class FirstTask : ActionNode
         if (!isExecuting && (blackboard.priorityTask == 1 || (blackboard.priorityTask == 0 && blackboard.probability <= blackboard.firstThreshold)))
         {
 
-            Debug.Log("Toca primera regla! Ha sido por prioridad: " + (blackboard.priorityTask == 1) + ", ha sido por probabilidad: " + (blackboard.priorityTask == 0 && blackboard.probability <= blackboard.firstThreshold));
-            Debug.Log("FirstThreshold: " + blackboard.firstThreshold + ", probability: " + blackboard.probability);
-            Debug.Log("La primera tarea es: " + blackboard.Tasks[0]);
-            context.agent.destination = blackboard.CandlePosition;
-            isExecuting = true;
+            //Debug.Log("La primera tarea es: " + blackboard.Tasks[0]);
 
+            if (blackboard.Tasks[0] != "sweep")
+            {
+
+                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]);
+
+                while (destination == null)
+                {
+
+                    new WaitForSeconds(2f);
+                    destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]);
+
+                }
+
+                context.agent.destination = (Vector3)destination;
+                isExecuting = true;
+
+            }
+            else
+            {
+            
+                context.broomGO.SetActive(true);
+                isExecuting = true;
+
+            }
 
         }
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
-            Debug.LogWarning("IMPOSIBLE IR! FIRST TASK");
+            //Debug.LogWarning("IMPOSIBLE IR! FIRST TASK");
+            return State.Failure;
         }
 
 
@@ -53,14 +76,20 @@ public class FirstTask : ActionNode
         
             if (timeOnTask < taskTime)
             {
-                //Debug.Log("Ejecutando primera regla! timeOnTask: " + timeOnTask);
                 return State.Running;
             } else
             {
 
                 isExecuting = false;
 
-                Debug.Log("Finalizada primera regla!");
+                if (context.broomGO.activeSelf)
+                {
+
+                    context.broomGO.SetActive(false);
+
+                }
+
+                //Debug.Log("Finalizada primera regla!");
                 blackboard.firstTaskTime = Time.time + blackboard.maxTime;
                 return State.Success;
 

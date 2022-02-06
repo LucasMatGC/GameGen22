@@ -10,6 +10,8 @@ public class ActionsMaster : MonoBehaviour
     public GameObject candles;
     public GameObject relic;
 
+    public static ActionsMaster instance;
+
     string[] actions = { "read", "pray", "watch", "sweep", "lighter" };
     string[] selectedActions = { "", "", "" };
     string[] optionalActions;
@@ -19,43 +21,46 @@ public class ActionsMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        instance = this;
+
         var rnd = new System.Random();
         int first = rnd.Next(5);
         int second = rnd.Next(4);
-        int therd = rnd.Next(3);
+        int third = rnd.Next(3);
 
         if (first <= second)
         {
             second++;
-            if (first <= therd)
+            if (first <= third)
             {
-                therd++;
+                third++;
             }
-            if (second <= therd)
+            if (second <= third)
             {
-                therd++;
+                third++;
             }
         }
         else
         {
-            if (first <= therd)
+            if (second <= third)
             {
-                therd++;
+                third++;
             }
-            if (second <= therd)
+            if (first <= third)
             {
-                therd++;
+                third++;
             }
         }
         
         selectedActions[0] = actions[first];
         selectedActions[1] = actions[second];
-        selectedActions[2] = actions[therd];
+        selectedActions[2] = actions[third];
         optionalActions = actions.Except(selectedActions).ToArray();
         
     }
 
-    public string[] giveMeActions()
+    public string[] GiveMeActions()
     {
         var rnd = new System.Random();
         int i = rnd.Next(2);
@@ -63,19 +68,19 @@ public class ActionsMaster : MonoBehaviour
         return newActions;
     }
 
-    public Vector3? iHaveTo(string action)
+    public Vector3? IHaveTo(string action)
     {
-        Debug.Log("action by NPC " + action);
+        //Debug.Log("action by NPC " + action);
         switch (action)
         {
             case "read":
                 return tables.gameObject.GetComponent<ActionsGeneralController>().getFreeAction();
-                break;
+                //break;
             case "pray":
                 if (!prayAssigned && !pray.gameObject.GetComponent<PrayController>().busy)
                 {
                     prayAssigned = true;
-                    StartCoroutine(waitPray(10f));
+                    StartCoroutine(WaitPray(3f));
                     return pray.gameObject.transform.position;
                 }
                 break;
@@ -83,23 +88,23 @@ public class ActionsMaster : MonoBehaviour
                 if (!watchAssigned && !relic.gameObject.GetComponent<RelicController>().busy)
                 {
                     watchAssigned = true;
-                    StartCoroutine(waitWatch(10f));
+                    StartCoroutine(WaitWatch(3f));
                     return relic.gameObject.transform.position;
                 }
                 break;
             case "lighter":
                 return candles.gameObject.GetComponent<ActionsGeneralController>().getFreeAction();
-                break;
+                //break;
         }
         return null;
     }
 
-    IEnumerator waitPray(float time)
+    IEnumerator WaitPray(float time)
     {
         prayAssigned = true;
         yield return new WaitForSeconds(time);
     }
-    IEnumerator waitWatch(float time)
+    IEnumerator WaitWatch(float time)
     {
         watchAssigned = true;
         yield return new WaitForSeconds(time);

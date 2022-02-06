@@ -27,9 +27,9 @@ public class TableController : MonoBehaviour
 
     IEnumerator MyCoroutine(float booking)
     {
-        Debug.Log("Leyendo");
+        //Debug.Log("Leyendo");
         yield return new WaitForSeconds(booking);
-        Debug.Log("Accion terminada");
+        //Debug.Log("Accion terminada");
         tableGeneral.GetComponent<ActionsGeneralController>().markActionFree(table);
         busy = false;
     }

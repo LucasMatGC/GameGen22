@@ -11,6 +11,8 @@ public class ThirdTask : ActionNode
 
     public float tolerance = 0.01f;
 
+    private Vector3? destination;
+
     protected override void OnStart()
     {
 
@@ -29,18 +31,38 @@ public class ThirdTask : ActionNode
         if (!isExecuting && (blackboard.priorityTask == 3 || (blackboard.priorityTask == 0 && blackboard.probability <= blackboard.thirdThreshold)))
         {
 
-            Debug.Log("Toca tercera regla! Ha sido por prioridad: " + (blackboard.priorityTask == 3) + ", ha sido por probabilidad: " + (blackboard.priorityTask == 0 && blackboard.probability <= blackboard.thirdThreshold));
-            Debug.Log("ThirdThreshold: " + blackboard.thirdThreshold+ ", probability: " + blackboard.probability);
-            Debug.Log("La primera tarea es: " + blackboard.Tasks[2]);
-            context.agent.destination = blackboard.PoisonPosition;
-            isExecuting = true;
+            //Debug.Log("La primera tarea es: " + blackboard.Tasks[2]);
+
+            if (blackboard.Tasks[2] != "sweep")
+            {
+
+                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[2]);
+
+                while (destination == null)
+                {
+                    new WaitForSeconds(2f);
+                    destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[2]);
+
+                }
+
+                context.agent.destination = (Vector3)destination;
+                isExecuting = true;
+
+            } else
+            {
+
+                context.broomGO.SetActive(true);
+                isExecuting = true;
+
+            }
 
 
-        }
+    }
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
-            Debug.LogWarning("IMPOSIBLE IR! THIRD TASK");
+            //Debug.LogWarning("IMPOSIBLE IR! THIRD TASK");
+            return State.Failure;
         }
 
         if (isExecuting)
@@ -53,7 +75,6 @@ public class ThirdTask : ActionNode
 
             if (timeOnTask < taskTime)
             {
-                //Debug.Log("Ejecutando tercera regla! timeOnTask: " + timeOnTask);
                 return State.Running;
             }
             else
@@ -61,7 +82,14 @@ public class ThirdTask : ActionNode
 
                 isExecuting = false;
 
-                Debug.Log("Finalizada tercera regla!");
+                if (context.broomGO.activeSelf)
+                {
+
+                    context.broomGO.SetActive(false);
+
+                }
+
+                //Debug.Log("Finalizada tercera regla!");
                 blackboard.thirdTaskTime = Time.time + blackboard.maxTime;
                 return State.Success;
 

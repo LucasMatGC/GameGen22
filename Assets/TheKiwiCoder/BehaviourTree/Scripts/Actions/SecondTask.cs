@@ -11,6 +11,8 @@ public class SecondTask : ActionNode
 
     public float tolerance = 0.01f;
 
+    private Vector3? destination;
+
     protected override void OnStart()
     {
 
@@ -29,18 +31,37 @@ public class SecondTask : ActionNode
         if (!isExecuting && (blackboard.priorityTask == 2 || (blackboard.priorityTask == 0 && blackboard.probability <= blackboard.secondThreshold)))
         {
 
-            Debug.Log("Toca segunda regla! Ha sido por prioridad: " + (blackboard.priorityTask == 2) + ", ha sido por probabilidad: " + (blackboard.priorityTask == 0 && blackboard.probability <= blackboard.secondThreshold));
-            Debug.Log("SecondThreshold: " + blackboard.secondThreshold + ", probability: " + blackboard.probability);
-            Debug.Log("La primera tarea es: " + blackboard.Tasks[1]);
-            context.agent.destination = blackboard.AltarPosition;
-            isExecuting = true;
+            //Debug.Log("La primera tarea es: " + blackboard.Tasks[1]);
 
+            if (blackboard.Tasks[1] != "sweep")
+            {
 
-        }
+                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[1]);
+
+                while (destination == null)
+                {
+                    new WaitForSeconds(2f);
+                    destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[1]);
+
+                }
+
+                context.agent.destination = (Vector3)destination;
+                isExecuting = true;
+
+            } else
+            {
+
+                context.broomGO.SetActive(true);
+                isExecuting = true;
+
+            }
+
+    }
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
-            Debug.LogWarning("IMPOSIBLE IR! SECODN TASK");
+            //Debug.LogWarning("IMPOSIBLE IR! SECODN TASK");
+            return State.Failure;
         }
 
         if (isExecuting)
@@ -53,7 +74,6 @@ public class SecondTask : ActionNode
 
             if (timeOnTask < taskTime)
             {
-                //Debug.Log("Ejecutando segunda regla! timeOnTask: " + timeOnTask);
                 return State.Running;
             }
             else
@@ -61,7 +81,14 @@ public class SecondTask : ActionNode
 
                 isExecuting = false;
 
-                Debug.Log("Finalizada segunda regla!");
+                if (context.broomGO.activeSelf)
+                {
+
+                    context.broomGO.SetActive(false);
+
+                }
+
+                //Debug.Log("Finalizada segunda regla!");
                 blackboard.secondTaskTime = Time.time + blackboard.maxTime;
                 return State.Success;
 
