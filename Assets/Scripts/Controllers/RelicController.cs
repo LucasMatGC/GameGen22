@@ -18,9 +18,9 @@ public class RelicController : MonoBehaviour
 
     IEnumerator MyCoroutine(float booking)
     {
-        Debug.Log("Viendo reliquia");
+        //Debug.Log("Viendo reliquia");
         yield return new WaitForSeconds(booking);
-        Debug.Log("Accion terminada");
+        //Debug.Log("Accion terminada");
         busy = false;
     }
 }

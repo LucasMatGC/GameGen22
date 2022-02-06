@@ -9,7 +9,7 @@ namespace TheKiwiCoder {
 
         protected override void OnStart() {
             startTime = Time.time;
-            Debug.Log("Ejecutando espera del NPC!");
+            //Debug.Log("Ejecutando espera del NPC!");
         }
 
         protected override void OnStop() {
@@ -17,7 +17,7 @@ namespace TheKiwiCoder {
 
         protected override State OnUpdate() {
             if (Time.time - startTime > duration) {
-                Debug.Log("Finalizada espera del NPC!");
+                //Debug.Log("Finalizada espera del NPC!");
                 return State.Success;
             }
             return State.Running;

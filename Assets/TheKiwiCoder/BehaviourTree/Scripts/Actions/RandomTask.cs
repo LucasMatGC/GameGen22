@@ -12,6 +12,8 @@ public class RandomTask : ActionNode
 
     public float tolerance = 0.01f;
 
+    private Vector3? destination;
+
     protected override void OnStart()
     {
 
@@ -31,30 +33,37 @@ public class RandomTask : ActionNode
         if (!isExecuting && blackboard.probability <= threshold)
         {
 
-            Debug.Log("Toca tarea aleatoria! Ha sido por probabilidad: " + (blackboard.priorityTask == 0 && blackboard.probability <= threshold));
-            int randomTaskNumer = Random.Range(3, 5);
-            Debug.Log("La tarea aleatoria es: " + blackboard.Tasks[randomTaskNumer]);
+            //Debug.Log("La tarea aleatoria es: " + blackboard.Tasks[3]);
 
-            if (blackboard.Tasks[randomTaskNumer] == "Book")
+            if (blackboard.Tasks[3] != "sweep")
             {
 
-                context.agent.destination = blackboard.BookPosition;
+                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[3]);
+
+                while (destination == null)
+                {
+                    new WaitForSeconds(2f);
+                    destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[3]);
+
+                }
+
+                context.agent.destination = (Vector3)destination;
+                isExecuting = true;
 
             } else
             {
 
                 context.broomGO.SetActive(true);
+                isExecuting = true;
 
             }
 
-            isExecuting = true;
 
-
-        }
+    }
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
-            Debug.LogWarning("IMPOSIBLE IR! RANDOM TASK");
+            //Debug.LogWarning("IMPOSIBLE IR! RANDOM TASK");
         }
 
         if (isExecuting)
@@ -67,7 +76,6 @@ public class RandomTask : ActionNode
 
             if (timeOnTask < taskTime)
             {
-                //Debug.Log("Ejecutando tarea aleatoria!");
                 return State.Running;
             }
             else
@@ -82,7 +90,7 @@ public class RandomTask : ActionNode
 
                 }
 
-                Debug.Log("Finalizada tarea aleatoria!");
+                //Debug.Log("Finalizada tarea aleatoria!");
                 
                 return State.Success;
 

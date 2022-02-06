@@ -8,6 +8,8 @@ public class MoveToRandomPosition : ActionNode
     public float timeOnTask = 0f;
     public float taskTime = 5f;
     public float threshold = 1f;
+    public Vector2 min = new Vector2(-8.8f, -18.4f);
+    public Vector2 max = new Vector2(8.8f, 14.7f);
     public bool isExecuting = false;
 
     public float tolerance = 1.0f;
@@ -31,8 +33,8 @@ public class MoveToRandomPosition : ActionNode
         if (!isExecuting && blackboard.probability <= threshold)
         {
 
-            Debug.Log("Toca movimiento aleatorio! Ha sido por probabilidad: " + (blackboard.priorityTask == 0 && blackboard.probability <= threshold));
-            blackboard.RandomPosition = new Vector3(Random.Range(-11f, 11f), 0f, Random.Range(-13f, 12f));
+            //Debug.Log("Toca movimiento aleatorio! Ha sido por probabilidad: " + (blackboard.priorityTask == 0 && blackboard.probability <= threshold));
+            blackboard.RandomPosition = new Vector3(Random.Range(min.x, max.x), 0f, Random.Range(min.y, max.y));
             context.agent.destination = blackboard.RandomPosition;
             isExecuting = true;
 
@@ -41,7 +43,8 @@ public class MoveToRandomPosition : ActionNode
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
-            Debug.LogWarning("IMPOSIBLE IR! MOVEMENT TASK");
+            //Debug.LogWarning("IMPOSIBLE IR! MOVEMENT TASK");
+            return State.Failure;
         }
 
         if (isExecuting)
@@ -59,7 +62,7 @@ public class MoveToRandomPosition : ActionNode
 
                 isExecuting = false;
 
-                Debug.Log("Finalizada movimiento aleatorio!");
+                //Debug.Log("Finalizada movimiento aleatorio!");
                 return State.Success;
 
             }

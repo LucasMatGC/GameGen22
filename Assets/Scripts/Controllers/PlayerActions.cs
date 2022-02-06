@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     public GameObject player;
-    public GameObject camera;
+    public GameObject playerCamera;
 
     public float cameraMovementSpeed = 5f;
 
@@ -30,10 +30,10 @@ public class PlayerActions : MonoBehaviour
                     {
                         StartCoroutine(startAction(task, encendedorCollider));
                     }
-                    else
-                    {
-                        Debug.Log("La vela ya esta encendida, tienes que esperar a que se apague :(");
-                    }
+                    //else
+                    //{
+                    //    Debug.Log("La vela ya esta encendida, tienes que esperar a que se apague :(");
+                    //}
                     break;
 
                 case "altar":
@@ -41,10 +41,10 @@ public class PlayerActions : MonoBehaviour
                     {
                         StartCoroutine(startAction(task, rezarCollider));
                     }
-                    else
-                    {
-                        Debug.Log("Ya hay alguien rezando, espera a que este libre");
-                    }
+                    //else
+                    //{
+                    //    Debug.Log("Ya hay alguien rezando, espera a que este libre");
+                    //}
                     break;
 
                 case "book":
@@ -52,10 +52,10 @@ public class PlayerActions : MonoBehaviour
                     {
                         StartCoroutine(startAction(task, leerCollider));
                     }
-                    else
-                    {
-                        Debug.Log("Ya hay alguien leyendo en este sitio, espera a que este libre o busca otro");
-                    }
+                    //else
+                    //{
+                    //    Debug.Log("Ya hay alguien leyendo en este sitio, espera a que este libre o busca otro");
+                    //}
                     break;
 
                 case "relic":
@@ -63,10 +63,10 @@ public class PlayerActions : MonoBehaviour
                     {
                         StartCoroutine(startAction(task, reliquiaCollider));
                     }
-                    else
-                    {
-                        Debug.Log("Ya hay alguien leyendo en este sitio, espera a que este libre o busca otro");
-                    }
+                    //else
+                    //{
+                    //    Debug.Log("Ya hay alguien leyendo en este sitio, espera a que este libre o busca otro");
+                    //}
                     break;
 
                 default:
@@ -80,11 +80,11 @@ public class PlayerActions : MonoBehaviour
         {
             //Rotation
             Quaternion newRotation = Quaternion.Euler(50, 45, 0);
-            camera.transform.rotation = Quaternion.Lerp(camera.transform.rotation, newRotation, cameraMovementSpeed * Time.deltaTime);
+            playerCamera.transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, newRotation, cameraMovementSpeed * Time.deltaTime);
             //Position
             Vector3 posicionPer = player.transform.position;
             Vector3 newPos = new Vector3(posicionPer.x - 1, posicionPer.y + 2.3f, posicionPer.z - 1);
-            camera.transform.position = Vector3.Lerp(camera.transform.position, newPos, cameraMovementSpeed * Time.deltaTime);
+            playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, newPos, cameraMovementSpeed * Time.deltaTime);
         }
 
     }
@@ -136,37 +136,37 @@ public class PlayerActions : MonoBehaviour
     {
         doingTask = true;
         player.GetComponent<PlayerController>().enabled = false;
-        camera.GetComponent<CameraController>().enabled = false;
+        playerCamera.GetComponent<CameraController>().enabled = false;
         float actionTime = 0f;
         switch (currentTask)
         {
             case "lighter":
-                Debug.Log("Encendiendo... vela");
+                //Debug.Log("Encendiendo... vela");
                 actionTime = 5f;
                 other.gameObject.GetComponent<CandleController>().lightCandle(actionTime);
                 break;
             case "altar":
-                Debug.Log("Rezando...");
+                //Debug.Log("Rezando...");
                 actionTime = 5f;        
                 other.gameObject.GetComponent<PrayController>().pray(actionTime);
                 break;
             case "book":
-                Debug.Log("Leyendo...");
+                //Debug.Log("Leyendo...");
                 actionTime = 5f;
                 other.gameObject.GetComponent<TableController>().read(actionTime);
                 break;
             case "relic":
-                Debug.Log("Viendo la reliquia...");
+                //Debug.Log("Viendo la reliquia...");
                 actionTime = 5f;
                 other.gameObject.GetComponent<RelicController>().watch(actionTime);
                 break;
             case "sweep":
-                Debug.Log("Barriendo...");
+                //Debug.Log("Barriendo...");
                 actionTime = 5f;                
                 break;
         }
         yield return new WaitForSeconds(actionTime);
-        camera.GetComponent<CameraController>().enabled = true;
+        playerCamera.GetComponent<CameraController>().enabled = true;
         player.GetComponent<PlayerController>().enabled = true;
         doingTask = false;
     }

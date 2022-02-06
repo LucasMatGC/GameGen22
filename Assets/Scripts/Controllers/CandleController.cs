@@ -28,11 +28,11 @@ public class CandleController : MonoBehaviour
     IEnumerator MyCoroutine(float booking)
     {
         yield return new WaitForSeconds(booking);
-        Debug.Log("Vela encendida");
+        //Debug.Log("Vela encendida");
         var rand = new System.Random();
         int time = rand.Next(7, 13);
         yield return new WaitForSeconds(time);
-        Debug.Log("Vela apagada");
+        //Debug.Log("Vela apagada");
         candleGeneral.GetComponent<ActionsGeneralController>().markActionFree(candle);
         busy = false;
     }

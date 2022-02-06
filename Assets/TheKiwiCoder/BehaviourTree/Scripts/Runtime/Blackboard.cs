@@ -25,11 +25,6 @@ namespace TheKiwiCoder {
         public int priorityTask = 0;
 
         public string[] Tasks;
-
-        public Vector3 BookPosition;
-        public Vector3 AltarPosition;
-        public Vector3 CandlePosition;
-        public Vector3 PoisonPosition;
         public Vector3 RandomPosition;
 
     }
