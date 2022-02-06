@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class TableController : MonoBehaviour
 {
-    public bool ocupado = false;
+    public bool busy = false;
+    public GameObject tableGeneral;
+    public GameObject table;
 
-    public void leer(float reserva)
+    private void Start()
     {
-        if (ocupado == false)
+        tableGeneral.GetComponent<ActionsGeneralController>().addActionToList(table);
+    }
+
+    public void read(float booking)
+    {
+        if (busy == false)
         {
-            ocupado = true;
-            StartCoroutine(MyCoroutine(reserva));
+            busy = true;
+            tableGeneral.GetComponent<ActionsGeneralController>().markActionTaken(table); 
+            //tableGeneral.GetComponent<ActionsGeneralController>().getFreeAction();
+            StartCoroutine(MyCoroutine(booking));
         }
 
     }
 
-    IEnumerator MyCoroutine(float reserva)
+    IEnumerator MyCoroutine(float booking)
     {
         Debug.Log("Leyendo");
-        yield return new WaitForSeconds(reserva);
+        yield return new WaitForSeconds(booking);
         Debug.Log("Accion terminada");
-        ocupado = false;
+        tableGeneral.GetComponent<ActionsGeneralController>().markActionFree(table);
+        busy = false;
     }
 }
