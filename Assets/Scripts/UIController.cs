@@ -3,27 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 
 public class UIController : MonoBehaviour
 {
     //Main menu vars
     private bool splashActive = false;
     
-    
-    public GameObject fadeOut;
-    public GameObject[] menuButtons;
+
     public GameObject logo;
     public GameObject pressAnyText;
-    public GameObject buttonBG;
-
+    
     //Pause menu vars
+    private bool pause = false;
+    private GameObject player;
+    private bool readyToPause = true;
+    private Color[] colors= {new Color32(24,255,0,255), new Color32(0,169,255,255), new Color32(101,0,255,255), new Color32(255,29,0,255), new Color32(255,202,0,255)};
+
+    public GameObject pauseCanvas;
+    public GameObject postProcessingVolume;
+
+    //Common vars
+    string currentSceneName;
+    GameObject myEventSystem;
 
 
+    public GameObject buttonBG;
+    public GameObject[] menuButtons;
+    public GameObject fadeOut;
+
+
+    //Lerping vars
+    private float minWeight = 0f;
+    private float maxWeight =  1.0f;
+
+    static float t = 0.0f;
+    private int blurLerp = 0;
 
 
 
     //Prevent the controller from being destroyed. If there are more than 1, destroy the duplicates.
-    void Awake(){
+    /*void Awake(){
         GameObject[] objs = GameObject.FindGameObjectsWithTag("UIController");
 
         if (objs.Length > 1)
@@ -32,22 +54,25 @@ public class UIController : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
-    }
+    }*/
 
 
     void Start()
     {
         // Create a temporary reference to the current scene.
         Scene currentScene = SceneManager.GetActiveScene();
-        string currentSceneName = currentScene.name;
+        currentSceneName = currentScene.name;
         menuButtons = GameObject.FindGameObjectsWithTag("UIButton");
+        myEventSystem = GameObject.Find("EventSystem");
 
         if (currentSceneName == "MainMenu"){
             //Setup the main menu variables
+            Time.timeScale = 1;
             StartCoroutine(WaitToProceed(2f));
         }
-        else if(currentSceneName == "FirstLevel"){
-
+        else if(currentSceneName == "PauseMenuScene"){
+            StartCoroutine(DeactivateFadeIn());
+            player = GameObject.Find("Player");
         }
     }
 
@@ -57,6 +82,31 @@ public class UIController : MonoBehaviour
         if (splashActive && Input.anyKey){
             StartCoroutine("ActivateMainMenu");
             splashActive = false;
+        }
+        
+        if (currentSceneName == "PauseMenuScene" && readyToPause && Input.GetKeyDown(KeyCode.Escape)){
+            PauseContinue();
+        }
+
+        if (blurLerp != 0){
+            // animate the postprocessing effects...
+            if(blurLerp == 1){
+                postProcessingVolume.GetComponent<PostProcessVolume>().weight = Mathf.Lerp(minWeight, maxWeight, t);
+            }
+            else if (blurLerp == -1){
+                postProcessingVolume.GetComponent<PostProcessVolume>().weight = Mathf.Lerp(maxWeight, minWeight, t);
+            }
+            // .. and increase the t interpolater
+            t += 2.75f * Time.unscaledDeltaTime;
+
+            // now check if the interpolator has reached 1.0
+            // and swap maximum and minimum so game object moves
+            // in the opposite direction.
+            if (t > 1f || t < 0.0f)
+            {
+                blurLerp = 0;
+                t = 0.0f;
+            }
         }
     }
 
@@ -69,13 +119,32 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         
         buttonBG.SetActive(true);
+        StartCoroutine(ShowButtons());
+    }
 
-        yield return new WaitForSeconds(.1f);
+    private IEnumerator ShowButtons(){
+        buttonBG.GetComponent<Animator>().SetBool("hide", false);
+
+        yield return new WaitForSecondsRealtime(.1f);
         foreach(GameObject button in menuButtons){
             button.GetComponent<Image>().enabled = true;
             button.transform.GetChild(0).GetComponent<Text>().enabled = true;
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSecondsRealtime(.1f);
         }
+        readyToPause = true;
+    }
+
+    private IEnumerator HideButtons(){
+        buttonBG.GetComponent<Animator>().SetBool("hide", true);
+
+        for (int i = menuButtons.Length - 1; i >= 0; i--){
+            menuButtons[i].GetComponent<Image>().enabled = false;
+            menuButtons[i].transform.GetChild(0).GetComponent<Text>().enabled = false;
+            yield return new WaitForSecondsRealtime(.08f);
+        }
+        yield return new WaitForSecondsRealtime(0.15f);
+        readyToPause = true;
+        pauseCanvas.GetComponent<Canvas>().enabled = false;
     }
 
     private IEnumerator WaitToProceed(float timeToWait){
@@ -85,13 +154,7 @@ public class UIController : MonoBehaviour
     }
 
     public void StartButton(){
-        StartCoroutine(StartGame());
-    }
-
-    private IEnumerator StartGame(){
-        fadeOut.SetActive(true);
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("FirstLevel", LoadSceneMode.Single);
+        StartCoroutine(ChangeScene("PauseMenuScene"));
     }
 
     public void HowToButton(){
@@ -103,12 +166,47 @@ public class UIController : MonoBehaviour
     }
 
     public void ExitButton(){
-        StartCoroutine(LeaveGame());
+        StartCoroutine(ChangeScene("exit"));
     }
 
-    private IEnumerator LeaveGame(){
+    public void BackToMainMenuButton(){
+        StartCoroutine(ChangeScene("MainMenu"));
+    }
+
+    public void PauseContinue(){
+        pause = !pause;
+        player.GetComponent<PlayerController>().enabled = !pause;
+        if(pause){
+            Bloom bloom;
+            postProcessingVolume.GetComponent<PostProcessVolume>().profile.TryGetSettings(out bloom);
+            bloom.color.value = colors[Random.Range(0, colors.Length)];
+            Time.timeScale = 0;
+            blurLerp = 1;
+            buttonBG.GetComponent<Image>().enabled = true;
+            pauseCanvas.GetComponent<Canvas>().enabled = true;
+            readyToPause = false;
+            StartCoroutine(ShowButtons());
+        } 
+        else{
+            myEventSystem.GetComponent<EventSystem>().SetSelectedGameObject(null);
+            readyToPause = false;
+            StartCoroutine(HideButtons());
+            blurLerp = -1;
+            Time.timeScale = 1;
+        } 
+    }
+
+    private IEnumerator ChangeScene(string sceneName){
         fadeOut.SetActive(true);
+        fadeOut.GetComponent<Animator>().SetBool("fadeOut", true);
+        yield return new WaitForSecondsRealtime(1f);
+        if (sceneName != "exit") SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        else Application.Quit();
+    }
+
+    public IEnumerator DeactivateFadeIn(){
         yield return new WaitForSeconds(1);
-        Application.Quit();
+        fadeOut.SetActive(false);
+        pauseCanvas.GetComponent<Canvas>().enabled = false;
     }
 }
