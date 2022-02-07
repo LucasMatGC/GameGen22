@@ -99,28 +99,28 @@ public class ActionsMaster : MonoBehaviour
         return null;
     }
     
-    void startAction(string currentTask, GameObject other)
+    public void StartAction(string currentTask, GameObject other)
     {
         float actionTime;
         switch (currentTask)
         {
             case "lighter":
-                //Debug.Log("Encendiendo... vela");
+                Debug.Log("Encendiendo... vela");
                 actionTime = 5f;
                 other.GetComponent<CandleController>().lightCandle(actionTime);
                 break;
-            case "altar":
-                //Debug.Log("Rezando...");
+            case "pray":
+                Debug.Log("Rezando...");
                 actionTime = 5f;
                 other.GetComponent<PrayController>().pray(actionTime);
                 break;
-            case "book":
-                //Debug.Log("Leyendo...");
+            case "read":
+                Debug.Log("Leyendo...");
                 actionTime = 5f;
                 other.GetComponent<TableController>().read(actionTime);
                 break;
-            case "relic":
-                //Debug.Log("Viendo la reliquia...");
+            case "watch":
+                Debug.Log("Viendo la reliquia...");
                 actionTime = 5f;
                 other.GetComponent<RelicController>().watch(actionTime);
                 break;

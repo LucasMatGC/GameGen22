@@ -11,7 +11,8 @@ public class ThirdTask : ActionNode
 
     public float tolerance = 0.01f;
 
-    private Vector3? destination;
+    private GameObject? task;
+    private bool isActionActivated = false;
 
     protected override void OnStart()
     {
@@ -31,24 +32,19 @@ public class ThirdTask : ActionNode
         if (!isExecuting && (blackboard.priorityTask == 3 || (blackboard.priorityTask == 0 && blackboard.probability <= blackboard.thirdThreshold)))
         {
 
-            //Debug.Log("La primera tarea es: " + blackboard.Tasks[2]);
-
             if (blackboard.Tasks[2] != "sweep")
             {
 
-                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[2]).transform.position; 
+                task = ActionsMaster.instance.IHaveTo(blackboard.Tasks[2]); 
 
-                if (destination == null)
+                if (task == null)
                 {
 
                     return State.Failure;
                     
-                    //new WaitForSeconds(2f);
-                    //destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[2]);
-
                 }
 
-                context.agent.destination = (Vector3)destination;
+                context.agent.destination = (Vector3)task.transform.position;
                 isExecuting = true;
 
             } else
@@ -64,7 +60,6 @@ public class ThirdTask : ActionNode
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
-            //Debug.LogWarning("IMPOSIBLE IR! THIRD TASK");
             return State.Failure;
         }
 
@@ -73,6 +68,15 @@ public class ThirdTask : ActionNode
 
             if (context.agent.remainingDistance <= tolerance)
             {
+
+                if (!isActionActivated)
+                {
+
+                    ActionsMaster.instance.StartAction(blackboard.Tasks[2], task);
+                    isActionActivated = true;
+
+                }
+
                 timeOnTask += Time.deltaTime;
             }
 
@@ -92,7 +96,6 @@ public class ThirdTask : ActionNode
 
                 }
 
-                //Debug.Log("Finalizada tercera regla!");
                 blackboard.thirdTaskTime = Time.time + blackboard.maxTime;
                 return State.Success;
 

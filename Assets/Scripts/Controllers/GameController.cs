@@ -6,11 +6,26 @@ public class GameController : MonoBehaviour
 {
     public GameObject player;
 
+    public static GameController instance;
+
     public float timerEndOfGame = 300.0f;
 
-    public float timerForTask1 = 60.0f;
-    public float timerForTask2 = 60.0f;
-    public float timerForTask3 = 60.0f;
+    public float maxTaskTime = 60.0f;
+
+    public float timerForTask1;
+    public float timerForTask2;
+    public float timerForTask3;
+
+    private void Start()
+    {
+
+        instance = this;
+
+        timerForTask1 = maxTaskTime;
+        timerForTask2 = maxTaskTime;
+        timerForTask3 = maxTaskTime;
+
+    }
 
 
     // Update is called once per frame
@@ -43,15 +58,15 @@ public class GameController : MonoBehaviour
 
     public void ResetTimer1()
     {
-        timerForTask1 = 60.0f;
+        timerForTask1 = maxTaskTime;
     }
     public void ResetTimer2()
     {
-        timerForTask2 = 60.0f;
+        timerForTask2 = maxTaskTime;
     }
     public void ResetTimer3()
     {
-        timerForTask3 = 60.0f;
+        timerForTask3 = maxTaskTime;
     }
 
     void ChooseMenu()
@@ -63,6 +78,7 @@ public class GameController : MonoBehaviour
     {
         player.GetComponent<PlayerController>().enabled = false;
         player.GetComponent<PlayerActions>().enabled = false;
+        player.transform.rotation = new Quaternion(-45f, player.transform.rotation.y, player.transform.rotation.z, player.transform.rotation.w);
         Debug.Log("YOU LOSE!");
     }
 }

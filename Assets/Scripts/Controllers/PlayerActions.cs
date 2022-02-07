@@ -151,17 +151,17 @@ public class PlayerActions : MonoBehaviour
         if (currentTask.Equals(requiredActions[0]))
         {
             Debug.Log("Reseteo tarea 1");
-            player.gameObject.GetComponent<GameController>().ResetTimer1();
+            GameController.instance.ResetTimer1();
         }
         else if(currentTask.Equals(requiredActions[1]))
         {
             Debug.Log("Reseteo tarea 2");
-            player.gameObject.GetComponent<GameController>().ResetTimer2();
+            GameController.instance.ResetTimer2();
         }
         else if (currentTask.Equals(requiredActions[2]))
         {
             Debug.Log("Reseteo tarea 3");
-            player.gameObject.GetComponent<GameController>().ResetTimer3();
+            GameController.instance.ResetTimer3();
         }
         
         float actionTime = 0f;
