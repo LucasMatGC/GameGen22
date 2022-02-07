@@ -4,17 +4,21 @@ using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 
-namespace TheKiwiCoder {
+namespace TheKiwiCoder
+{
 
-    public class NodePort : Port {
+    public class NodePort : Port
+    {
 
         // GITHUB:UnityCsReference-master\UnityCsReference-master\Modules\GraphViewEditor\Elements\Port.cs
-        private class DefaultEdgeConnectorListener : IEdgeConnectorListener {
+        private class DefaultEdgeConnectorListener : IEdgeConnectorListener
+        {
             private GraphViewChange m_GraphViewChange;
             private List<Edge> m_EdgesToCreate;
             private List<GraphElement> m_EdgesToDelete;
 
-            public DefaultEdgeConnectorListener() {
+            public DefaultEdgeConnectorListener()
+            {
                 m_EdgesToCreate = new List<Edge>();
                 m_EdgesToDelete = new List<GraphElement>();
 
@@ -22,7 +26,8 @@ namespace TheKiwiCoder {
             }
 
             public void OnDropOutsidePort(Edge edge, Vector2 position) { }
-            public void OnDrop(GraphView graphView, Edge edge) {
+            public void OnDrop(GraphView graphView, Edge edge)
+            {
                 m_EdgesToCreate.Clear();
                 m_EdgesToCreate.Add(edge);
 
@@ -43,11 +48,13 @@ namespace TheKiwiCoder {
                     graphView.DeleteElements(m_EdgesToDelete);
 
                 var edgesToCreate = m_EdgesToCreate;
-                if (graphView.graphViewChanged != null) {
+                if (graphView.graphViewChanged != null)
+                {
                     edgesToCreate = graphView.graphViewChanged(m_GraphViewChange).edgesToCreate;
                 }
 
-                foreach (Edge e in edgesToCreate) {
+                foreach (Edge e in edgesToCreate)
+                {
                     graphView.AddElement(e);
                     edge.input.Connect(e);
                     edge.output.Connect(e);
@@ -55,14 +62,16 @@ namespace TheKiwiCoder {
             }
         }
 
-        public NodePort(Direction direction, Capacity capacity) : base(Orientation.Vertical, direction, capacity, typeof(bool)) {
+        public NodePort(Direction direction, Capacity capacity) : base(Orientation.Vertical, direction, capacity, typeof(bool))
+        {
             var connectorListener = new DefaultEdgeConnectorListener();
             m_EdgeConnector = new EdgeConnector<Edge>(connectorListener);
             this.AddManipulator(m_EdgeConnector);
             style.width = 100;
         }
 
-        public override bool ContainsPoint(Vector2 localPoint) {
+        public override bool ContainsPoint(Vector2 localPoint)
+        {
             Rect rect = new Rect(0, 0, layout.width, layout.height);
             return rect.Contains(localPoint);
         }
