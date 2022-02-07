@@ -13,17 +13,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: FenceEye
-    second: {fileID: 2100000, guid: 10b2f57f4a74157479ecdf08f03f9d85, type: 2}
+    second: {fileID: 2100000, guid: 9c24fdeff060aa84cbbdfa053de41e17, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal1
+    second: {fileID: 2100000, guid: 9c24fdeff060aa84cbbdfa053de41e17, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: StepEye
-    second: {fileID: 2100000, guid: 19ba5f32bb959904a87dd4cbef01b22c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: SuppEye
-    second: {fileID: 2100000, guid: 144fd6860fcafa745993266c26db7209, type: 2}
+    second: {fileID: 2100000, guid: 9c24fdeff060aa84cbbdfa053de41e17, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -54,7 +54,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1.5
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -105,7 +105,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.015
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

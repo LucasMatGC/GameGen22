@@ -7,18 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Bricks1
-    second: {fileID: 2100000, guid: ebf4ea8f579f0b94b90e65789fc7e938, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Metal1
-    second: {fileID: 2100000, guid: baae2eba32adeff4592a339fd1b00219, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wood
-    second: {fileID: 2100000, guid: 8a99f6a361a387a4299554fa5890da34, type: 2}
+      name: lambert1
+    second: {fileID: 2100000, guid: 816801dffabd9cf459d07e8f6a971aec, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -49,7 +39,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 1.3
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -100,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 1.3
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
