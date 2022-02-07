@@ -70,7 +70,7 @@ public class UIController : MonoBehaviour
             Time.timeScale = 1;
             StartCoroutine(WaitToProceed(2f));
         }
-        else if(currentSceneName == "PauseMenuScene"){
+        else if(currentSceneName == "FirstLevel"){
             StartCoroutine(DeactivateFadeIn());
             player = GameObject.Find("Player");
         }
@@ -84,7 +84,7 @@ public class UIController : MonoBehaviour
             splashActive = false;
         }
         
-        if (currentSceneName == "PauseMenuScene" && readyToPause && Input.GetKeyDown(KeyCode.Escape)){
+        if (currentSceneName == "FirstLevel" && readyToPause && Input.GetKeyDown(KeyCode.Escape)){
             PauseContinue();
         }
 
@@ -154,7 +154,7 @@ public class UIController : MonoBehaviour
     }
 
     public void StartButton(){
-        StartCoroutine(ChangeScene("PauseMenuScene"));
+        StartCoroutine(ChangeScene("FirstLevel"));
     }
 
     public void HowToButton(){
