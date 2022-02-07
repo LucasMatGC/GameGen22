@@ -6,8 +6,6 @@ public class ActionsGeneralController : MonoBehaviour
 {
     List<(GameObject, bool)> actionsList = new List<(GameObject,bool)>();
     
-
-
     public void addActionToList(GameObject newAction)
     {
         actionsList.Add((newAction, true));

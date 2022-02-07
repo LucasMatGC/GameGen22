@@ -6,9 +6,11 @@ public class PlayerActions : MonoBehaviour
 {
     public GameObject player;
     public GameObject playerCamera;
+    public GameObject actionMaster;
 
     public float cameraMovementSpeed = 5f;
 
+    string[] requiredActions = { "", "", "" };
     string task = "";
     bool doingTask = false;
     int dontYouDare = 0;
@@ -17,6 +19,14 @@ public class PlayerActions : MonoBehaviour
     Collider rezarCollider;
     Collider leerCollider;
     Collider reliquiaCollider;
+
+    
+
+    void Start()
+    {
+        requiredActions = actionMaster.gameObject.GetComponent<actionMaster>().lightCandle(GiveMeActions);
+
+    }
 
     void Update()
     {
@@ -36,7 +46,7 @@ public class PlayerActions : MonoBehaviour
                     //}
                     break;
 
-                case "altar":
+                case "pray":
                     if (!rezarCollider.gameObject.GetComponent<PrayController>().busy)
                     {
                         StartCoroutine(startAction(task, rezarCollider));
@@ -47,7 +57,7 @@ public class PlayerActions : MonoBehaviour
                     //}
                     break;
 
-                case "book":
+                case "read":
                     if (!leerCollider.gameObject.GetComponent<TableController>().busy)
                     {
                         StartCoroutine(startAction(task, leerCollider));
@@ -58,7 +68,7 @@ public class PlayerActions : MonoBehaviour
                     //}
                     break;
 
-                case "relic":
+                case "watch":
                     if (!reliquiaCollider.gameObject.GetComponent<RelicController>().busy)
                     {
                         StartCoroutine(startAction(task, reliquiaCollider));
@@ -88,6 +98,7 @@ public class PlayerActions : MonoBehaviour
         }
 
     }
+    
 
     void OnTriggerEnter(Collider other)
     {
@@ -102,15 +113,15 @@ public class PlayerActions : MonoBehaviour
                 encendedorCollider = other;
                 break;
             case 9:
-                task = "altar";
+                task = "pray";
                 rezarCollider = other;
                 break;
             case 8:
-                task = "book";
+                task = "read";
                 leerCollider = other;
                 break;
             case 10:
-                task = "relic";
+                task = "watch";
                 reliquiaCollider = other;
                 break;
         }
@@ -137,6 +148,19 @@ public class PlayerActions : MonoBehaviour
         doingTask = true;
         player.GetComponent<PlayerController>().enabled = false;
         playerCamera.GetComponent<CameraController>().enabled = false;
+        switch (currentTask)
+        {
+            case requiredActions[0]:
+                Debug.Log("Reseteo tarea 0");
+                break;
+            case requiredActions[1]:
+                Debug.Log("Reseteo tarea 1");
+                break;
+            case requiredActions[2]:
+                Debug.Log("Reseteo tarea 2");
+                break;
+        }
+        
         float actionTime = 0f;
         switch (currentTask)
         {
@@ -145,17 +169,17 @@ public class PlayerActions : MonoBehaviour
                 actionTime = 5f;
                 other.gameObject.GetComponent<CandleController>().lightCandle(actionTime);
                 break;
-            case "altar":
+            case "pray":
                 //Debug.Log("Rezando...");
                 actionTime = 5f;        
                 other.gameObject.GetComponent<PrayController>().pray(actionTime);
                 break;
-            case "book":
+            case "read":
                 //Debug.Log("Leyendo...");
                 actionTime = 5f;
                 other.gameObject.GetComponent<TableController>().read(actionTime);
                 break;
-            case "relic":
+            case "watch":
                 //Debug.Log("Viendo la reliquia...");
                 actionTime = 5f;
                 other.gameObject.GetComponent<RelicController>().watch(actionTime);
@@ -169,8 +193,8 @@ public class PlayerActions : MonoBehaviour
         playerCamera.GetComponent<CameraController>().enabled = true;
         player.GetComponent<PlayerController>().enabled = true;
         doingTask = false;
-    }
-          
+    }   
+
 
 
 }

@@ -98,45 +98,39 @@ public class ActionsMaster : MonoBehaviour
         }
         return null;
     }
-    /*
-    IEnumerator startAction(string currentTask, Collider other)
+    
+    void startAction(string currentTask, GameObject other)
     {
-        doingTask = true;
-        player.GetComponent<PlayerController>().enabled = false;
-        playerCamera.GetComponent<CameraController>().enabled = false;
-        float actionTime = 0f;
+        
         switch (currentTask)
         {
             case "lighter":
                 //Debug.Log("Encendiendo... vela");
                 actionTime = 5f;
-                other.gameObject.GetComponent<CandleController>().lightCandle(actionTime);
+                other.GetComponent<CandleController>().lightCandle(actionTime);
                 break;
             case "altar":
                 //Debug.Log("Rezando...");
                 actionTime = 5f;
-                other.gameObject.GetComponent<PrayController>().pray(actionTime);
+                other.GetComponent<PrayController>().pray(actionTime);
                 break;
             case "book":
                 //Debug.Log("Leyendo...");
                 actionTime = 5f;
-                other.gameObject.GetComponent<TableController>().read(actionTime);
+                other.GetComponent<TableController>().read(actionTime);
                 break;
             case "relic":
                 //Debug.Log("Viendo la reliquia...");
                 actionTime = 5f;
-                other.gameObject.GetComponent<RelicController>().watch(actionTime);
+                other.GetComponent<RelicController>().watch(actionTime);
                 break;
             case "sweep":
                 //Debug.Log("Barriendo...");
                 actionTime = 5f;
                 break;
         }
-        yield return new WaitForSeconds(actionTime);
-        playerCamera.GetComponent<CameraController>().enabled = true;
-        player.GetComponent<PlayerController>().enabled = true;
-        doingTask = false;
-    }*/
+        
+    }
 
     IEnumerator WaitPray(float time)
     {
