@@ -38,7 +38,7 @@ public class RandomTask : ActionNode
             if (blackboard.Tasks[3] != "sweep")
             {
 
-                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[3]);
+                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[3]).transform.position;
 
                 if (destination == null)
                 {

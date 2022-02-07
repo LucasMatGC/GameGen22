@@ -34,7 +34,7 @@ public class FirstTask : ActionNode
             if (blackboard.Tasks[0] != "sweep")
             {
 
-                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]);
+                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]).transform.position;
 
                 if (destination == null)
                 {
