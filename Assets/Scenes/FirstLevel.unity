@@ -2932,9 +2932,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tables: {fileID: 2086521179}
-  pray: {fileID: 1123114784}
+  pray: {fileID: 141965238}
   candles: {fileID: 1389294431}
-  relic: {fileID: 2111620851}
+  relic: {fileID: 642185827}
 --- !u!1 &712838417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4742,11 +4742,6 @@ PrefabInstance:
 --- !u!4 &1123114783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2db3ef88d1f5b2e4db6b58833d58443c, type: 3}
-  m_PrefabInstance: {fileID: 1123114782}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1123114784 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2db3ef88d1f5b2e4db6b58833d58443c, type: 3}
   m_PrefabInstance: {fileID: 1123114782}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1128723623
@@ -9113,11 +9108,6 @@ PrefabInstance:
 --- !u!4 &2111620850 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a86a93bc47498c74ebd97ed5b72ebf90, type: 3}
-  m_PrefabInstance: {fileID: 2111620849}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2111620851 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a86a93bc47498c74ebd97ed5b72ebf90, type: 3}
   m_PrefabInstance: {fileID: 2111620849}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2112747259

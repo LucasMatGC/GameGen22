@@ -105,22 +105,22 @@ public class ActionsMaster : MonoBehaviour
         switch (currentTask)
         {
             case "lighter":
-                Debug.Log("Encendiendo... vela");
+                //Debug.Log("Encendiendo... vela");
                 actionTime = 5f;
                 other.GetComponent<CandleController>().lightCandle(actionTime);
                 break;
             case "pray":
-                Debug.Log("Rezando...");
+                //Debug.Log("Rezando...");
                 actionTime = 5f;
                 other.GetComponent<PrayController>().pray(actionTime);
                 break;
             case "read":
-                Debug.Log("Leyendo...");
+                //Debug.Log("Leyendo...");
                 actionTime = 5f;
                 other.GetComponent<TableController>().read(actionTime);
                 break;
             case "watch":
-                Debug.Log("Viendo la reliquia...");
+                //Debug.Log("Viendo la reliquia...");
                 actionTime = 5f;
                 other.GetComponent<RelicController>().watch(actionTime);
                 break;
