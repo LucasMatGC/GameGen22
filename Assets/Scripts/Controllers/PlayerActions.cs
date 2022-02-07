@@ -24,7 +24,7 @@ public class PlayerActions : MonoBehaviour
 
     void Start()
     {
-        requiredActions = actionMaster.gameObject.GetComponent<actionMaster>().lightCandle(GiveMeActions);
+        requiredActions = actionMaster.gameObject.GetComponent<ActionsMaster>().GiveMeActions();
 
     }
 
@@ -148,17 +148,20 @@ public class PlayerActions : MonoBehaviour
         doingTask = true;
         player.GetComponent<PlayerController>().enabled = false;
         playerCamera.GetComponent<CameraController>().enabled = false;
-        switch (currentTask)
+        if (currentTask.Equals(requiredActions[0]))
         {
-            case requiredActions[0]:
-                Debug.Log("Reseteo tarea 0");
-                break;
-            case requiredActions[1]:
-                Debug.Log("Reseteo tarea 1");
-                break;
-            case requiredActions[2]:
-                Debug.Log("Reseteo tarea 2");
-                break;
+            Debug.Log("Reseteo tarea 1");
+            player.gameObject.GetComponent<GameController>().ResetTimer1();
+        }
+        else if(currentTask.Equals(requiredActions[1]))
+        {
+            Debug.Log("Reseteo tarea 2");
+            player.gameObject.GetComponent<GameController>().ResetTimer2();
+        }
+        else if (currentTask.Equals(requiredActions[2]))
+        {
+            Debug.Log("Reseteo tarea 3");
+            player.gameObject.GetComponent<GameController>().ResetTimer3();
         }
         
         float actionTime = 0f;

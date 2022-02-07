@@ -101,7 +101,7 @@ public class ActionsMaster : MonoBehaviour
     
     void startAction(string currentTask, GameObject other)
     {
-        
+        float actionTime;
         switch (currentTask)
         {
             case "lighter":
@@ -125,8 +125,6 @@ public class ActionsMaster : MonoBehaviour
                 other.GetComponent<RelicController>().watch(actionTime);
                 break;
             case "sweep":
-                //Debug.Log("Barriendo...");
-                actionTime = 5f;
                 break;
         }
         
