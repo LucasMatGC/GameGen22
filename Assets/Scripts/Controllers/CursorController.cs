@@ -12,6 +12,7 @@ public class CursorController : MonoBehaviour
 
     private int currentFrame;
     private float frameTimer;
+    private int frameCount;
     private int direction = 1;
 
     public enum CursorType {
@@ -25,27 +26,27 @@ public class CursorController : MonoBehaviour
     }
 
     private void Start(){
-        SetActiveCursorType(CursorType.Default);
+        SetActiveCursorAnimation(GetCursorAnimation(CursorType.Default));
     }
 
     private void Update(){
-        frameTimer -= Time.unscaledDeltaTime;
+        frameTimer -= Time.deltaTime;
         if(frameTimer <= 0f){
             frameTimer += cursorAnimation.frameRate;
             currentFrame = (currentFrame + direction) % frameCount;
-            if (cursorAnimation.cursorType == CursorType.Transition && currentFrame == 0){
+            /*if (cursorAnimation.cursorType == CursorType.Transition && currentFrame == 0){
                 if (direction > 0) GetCursorAnimation(CursorType.Interact);
                 else GetCursorAnimation(CursorType.Default);
-            }
+            }*/
             Cursor.SetCursor(cursorAnimation.textureArray[currentFrame], new Vector2(5, 5), CursorMode.ForceSoftware);
         }
     }
 
     public void SetActiveCursorType(CursorType cursorType){
-        if (cursorType == CursorType.Default) direction = -1;
-        else direction = 1;
+        /*if (cursorType == CursorType.Default) direction = -1;
+        else direction = 1;*/
         
-        SetActiveCursorAnimation(GetCursorAnimation(CursorType.Interaction));
+        SetActiveCursorAnimation(GetCursorAnimation(cursorType));
     }
 
     private CursorAnimation GetCursorAnimation(CursorType cursorType){
