@@ -40,10 +40,13 @@ public class RandomTask : ActionNode
 
                 destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[3]);
 
-                while (destination == null)
+                if (destination == null)
                 {
-                    new WaitForSeconds(2f);
-                    destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[3]);
+
+                    return State.Failure;
+                    
+                    //new WaitForSeconds(2f);
+                    //destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[3]);
 
                 }
 

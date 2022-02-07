@@ -36,11 +36,13 @@ public class FirstTask : ActionNode
 
                 destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]);
 
-                while (destination == null)
+                if (destination == null)
                 {
 
-                    new WaitForSeconds(2f);
-                    destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]);
+                    return State.Failure;
+
+                    //new WaitForSeconds(2f);
+                    //destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]);
 
                 }
 

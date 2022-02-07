@@ -48,16 +48,14 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   timeOnTask: 0
   taskTime: 5
   threshold: 1
+  min: {x: -8.8, y: -18.4}
+  max: {x: 8.8, y: 14.7}
   isExecuting: 0
   tolerance: 1
 --- !u!114 &-1264524319666839463
@@ -75,7 +73,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: ff1163f49f692cd48a8edecaf4bdedf0
-  position: {x: -204.29005, y: 306.7}
+  position: {x: -203, y: 305}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     firstThreshold: 0
@@ -88,10 +86,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
@@ -127,10 +121,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
@@ -165,10 +155,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
@@ -203,10 +189,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
@@ -249,10 +231,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &2525073319750078487
 MonoBehaviour:
@@ -282,10 +260,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
@@ -322,10 +296,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
@@ -361,10 +331,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
@@ -400,10 +366,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
@@ -436,10 +398,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
@@ -478,10 +436,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
@@ -514,10 +468,6 @@ MonoBehaviour:
     probability: 0
     priorityTask: 0
     Tasks: []
-    BookPosition: {x: -65.66, y: 42.07, z: 0}
-    AltarPosition: {x: -68.59, y: -12.69, z: 0}
-    CandlePosition: {x: -59.31, y: 38.08, z: 0}
-    PoisonPosition: {x: 0, y: 0, z: 0}
     RandomPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0

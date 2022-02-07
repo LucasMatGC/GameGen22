@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TheKiwiCoder {
     public class Wait : ActionNode {
-        public float duration = 3;
+        public float duration = 1;
         float startTime;
 
         protected override void OnStart() {

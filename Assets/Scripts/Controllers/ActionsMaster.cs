@@ -101,12 +101,14 @@ public class ActionsMaster : MonoBehaviour
 
     IEnumerator WaitPray(float time)
     {
-        prayAssigned = true;
+        //prayAssigned = true;
         yield return new WaitForSeconds(time);
+        prayAssigned = false;
     }
     IEnumerator WaitWatch(float time)
     {
-        watchAssigned = true;
+        //watchAssigned = true;
         yield return new WaitForSeconds(time);
+        watchAssigned = false;
     }
 }

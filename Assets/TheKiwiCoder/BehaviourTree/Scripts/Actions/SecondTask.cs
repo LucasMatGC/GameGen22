@@ -38,10 +38,13 @@ public class SecondTask : ActionNode
 
                 destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[1]);
 
-                while (destination == null)
+                if (destination == null)
                 {
-                    new WaitForSeconds(2f);
-                    destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[1]);
+
+                    return State.Failure;
+                    
+                    //new WaitForSeconds(2f);
+                    //destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[1]);
 
                 }
 
