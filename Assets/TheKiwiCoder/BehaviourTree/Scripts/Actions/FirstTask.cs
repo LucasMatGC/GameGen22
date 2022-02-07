@@ -12,7 +12,8 @@ public class FirstTask : ActionNode
 
     public float tolerance = 0.01f;
 
-    private Vector3? destination = null;
+    private GameObject? task = null;
+    private bool isActionActivated = false;
 
     protected override void OnStart() {
 
@@ -29,24 +30,20 @@ public class FirstTask : ActionNode
         if (!isExecuting && (blackboard.priorityTask == 1 || (blackboard.priorityTask == 0 && blackboard.probability <= blackboard.firstThreshold)))
         {
 
-            //Debug.Log("La primera tarea es: " + blackboard.Tasks[0]);
 
             if (blackboard.Tasks[0] != "sweep")
             {
 
-                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]).transform.position;
+                task = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]);
 
-                if (destination == null)
+                if (task == null)
                 {
 
                     return State.Failure;
 
-                    //new WaitForSeconds(2f);
-                    //destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]);
-
                 }
-                Debug.Log("La primera " + blackboard.Tasks[0] + " se esta ejecutando");
-                context.agent.destination = (Vector3)destination;
+
+                context.agent.destination = (Vector3)task.transform.position;
                 isExecuting = true;
 
             }
@@ -62,7 +59,6 @@ public class FirstTask : ActionNode
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
-            //Debug.LogWarning("IMPOSIBLE IR! FIRST TASK");
             return State.Failure;
         }
 
@@ -72,6 +68,15 @@ public class FirstTask : ActionNode
 
             if (context.agent.remainingDistance <= tolerance)
             {
+
+                if (!isActionActivated)
+                {
+
+                    ActionsMaster.instance.StartAction(blackboard.Tasks[0], task);
+                    isActionActivated = true;
+
+                }
+
                 timeOnTask += Time.deltaTime;
             }
 
@@ -91,7 +96,6 @@ public class FirstTask : ActionNode
 
                 }
 
-                //Debug.Log("Finalizada primera regla!");
                 blackboard.firstTaskTime = Time.time + blackboard.maxTime;
                 return State.Success;
 
