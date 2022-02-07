@@ -13,12 +13,12 @@ public class CursorController : MonoBehaviour
     private int currentFrame;
     private float frameTimer;
     private int frameCount;
-    private int direction = 1;
 
     public enum CursorType {
         Default,
         Interact,
-        Transition
+        Awake,
+        Sleep
     }
 
     private void Awake(){
@@ -33,20 +33,16 @@ public class CursorController : MonoBehaviour
         frameTimer -= Time.deltaTime;
         if(frameTimer <= 0f){
             frameTimer += cursorAnimation.frameRate;
-            currentFrame = (currentFrame + direction) % frameCount;
-            /*if (cursorAnimation.cursorType == CursorType.Transition && currentFrame == 0){
-                if (direction > 0) GetCursorAnimation(CursorType.Interact);
-                else GetCursorAnimation(CursorType.Default);
-            }*/
+            currentFrame = (currentFrame + 1) % frameCount;
+            if (cursorAnimation.cursorType == CursorType.Awake && currentFrame == 0) SetActiveCursorAnimation(GetCursorAnimation(CursorType.Interact));
+            else if (cursorAnimation.cursorType == CursorType.Sleep && currentFrame == 0) SetActiveCursorAnimation(GetCursorAnimation(CursorType.Default));
             Cursor.SetCursor(cursorAnimation.textureArray[currentFrame], new Vector2(5, 5), CursorMode.ForceSoftware);
         }
     }
 
     public void SetActiveCursorType(CursorType cursorType){
-        /*if (cursorType == CursorType.Default) direction = -1;
-        else direction = 1;*/
-        
-        SetActiveCursorAnimation(GetCursorAnimation(cursorType));
+        if (cursorType == CursorType.Default) SetActiveCursorAnimation(GetCursorAnimation(CursorType.Sleep));
+        else SetActiveCursorAnimation(GetCursorAnimation(CursorType.Awake));
     }
 
     private CursorAnimation GetCursorAnimation(CursorType cursorType){
