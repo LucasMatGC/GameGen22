@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1b54088bb2227354ca550e763c7cd02b
+guid: 07761ced78626d44eb635b76c42dc0fd
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,18 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cuerda
-    second: {fileID: 2100000, guid: 0e7ff2e7a99894e45a4fe62c59b2f287, type: 2}
+      name: Broom2
+    second: {fileID: 2100000, guid: 162d52a59d891b74cafbc564b43d0481, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Escoba
+      name: Stick1
     second: {fileID: 2100000, guid: 9fd123c20d03a824fa9b1fb7841d9765, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Wood
-    second: {fileID: 2100000, guid: 8a99f6a361a387a4299554fa5890da34, type: 2}
+      name: String
+    second: {fileID: 2100000, guid: 0e7ff2e7a99894e45a4fe62c59b2f287, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
