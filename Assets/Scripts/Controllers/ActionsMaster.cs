@@ -68,7 +68,7 @@ public class ActionsMaster : MonoBehaviour
         return newActions;
     }
 
-    public Vector3? IHaveTo(string action)
+    public GameObject? IHaveTo(string action)
     {
         //Debug.Log("action by NPC " + action);
         switch (action)
@@ -81,7 +81,7 @@ public class ActionsMaster : MonoBehaviour
                 {
                     prayAssigned = true;
                     StartCoroutine(WaitPray(3f));
-                    return pray.gameObject.transform.position;
+                    return pray.gameObject;
                 }
                 break;
             case "watch":
@@ -89,7 +89,7 @@ public class ActionsMaster : MonoBehaviour
                 {
                     watchAssigned = true;
                     StartCoroutine(WaitWatch(3f));
-                    return relic.gameObject.transform.position;
+                    return relic.gameObject;
                 }
                 break;
             case "lighter":
@@ -98,6 +98,45 @@ public class ActionsMaster : MonoBehaviour
         }
         return null;
     }
+    /*
+    IEnumerator startAction(string currentTask, Collider other)
+    {
+        doingTask = true;
+        player.GetComponent<PlayerController>().enabled = false;
+        playerCamera.GetComponent<CameraController>().enabled = false;
+        float actionTime = 0f;
+        switch (currentTask)
+        {
+            case "lighter":
+                //Debug.Log("Encendiendo... vela");
+                actionTime = 5f;
+                other.gameObject.GetComponent<CandleController>().lightCandle(actionTime);
+                break;
+            case "altar":
+                //Debug.Log("Rezando...");
+                actionTime = 5f;
+                other.gameObject.GetComponent<PrayController>().pray(actionTime);
+                break;
+            case "book":
+                //Debug.Log("Leyendo...");
+                actionTime = 5f;
+                other.gameObject.GetComponent<TableController>().read(actionTime);
+                break;
+            case "relic":
+                //Debug.Log("Viendo la reliquia...");
+                actionTime = 5f;
+                other.gameObject.GetComponent<RelicController>().watch(actionTime);
+                break;
+            case "sweep":
+                //Debug.Log("Barriendo...");
+                actionTime = 5f;
+                break;
+        }
+        yield return new WaitForSeconds(actionTime);
+        playerCamera.GetComponent<CameraController>().enabled = true;
+        player.GetComponent<PlayerController>().enabled = true;
+        doingTask = false;
+    }*/
 
     IEnumerator WaitPray(float time)
     {

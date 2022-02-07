@@ -45,7 +45,7 @@ public class FirstTask : ActionNode
                     //destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]);
 
                 }
-
+                Debug.Log("La primera " + blackboard.Tasks[0] + " se esta ejecutando");
                 context.agent.destination = (Vector3)destination;
                 isExecuting = true;
 

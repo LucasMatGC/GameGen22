@@ -15,7 +15,7 @@ public class ActionsGeneralController : MonoBehaviour
         //Debug.Log("Total = " + actionsList.Count);
     }
 
-    public Vector3? getFreeAction()
+    public GameObject? getFreeAction()
     {
         if (actionsList.Count != 0)
         {
@@ -27,9 +27,9 @@ public class ActionsGeneralController : MonoBehaviour
                 {
                     action.Item2 = false;
                     actionsList[i] = action;
-                    //Debug.Log("Siguiente mesa libre "+ action);
+                    //Debug.Log("accion reservada "+ action);
                     markActionTaken(action.Item1);
-                    return action.Item1.transform.position;
+                    return action.Item1;
                 }
             }
         }
@@ -54,11 +54,12 @@ public class ActionsGeneralController : MonoBehaviour
     public void markActionFree(GameObject actionFree)
     {
         //(GameObject, bool) toFind = (tableTaken, true);
-        int location = actionsList.FindIndex(x => x.Item1 = actionFree);
+        int location = actionsList.FindIndex(x => x.Item1 == actionFree);
+        Debug.Log("accion libre location" + location);
         if (location != -1)
         {
             actionsList[location] = (actionFree, true);
-        //    Debug.Log("Mesa libre!!");
+            Debug.Log("accion libre " + actionFree);
         }
         //else
         //{

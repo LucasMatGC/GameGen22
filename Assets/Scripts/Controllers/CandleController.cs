@@ -8,6 +8,7 @@ public class CandleController : MonoBehaviour
 
     public GameObject candleGeneral;
     public GameObject candle;
+    public GameObject flame;
 
     private void Start()
     {
@@ -31,7 +32,9 @@ public class CandleController : MonoBehaviour
         //Debug.Log("Vela encendida");
         var rand = new System.Random();
         int time = rand.Next(7, 13);
+        flame.SetActive(true);
         yield return new WaitForSeconds(time);
+        flame.SetActive(false);
         //Debug.Log("Vela apagada");
         candleGeneral.GetComponent<ActionsGeneralController>().markActionFree(candle);
         busy = false;
