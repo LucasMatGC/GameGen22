@@ -12,7 +12,8 @@ public class FirstTask : ActionNode
 
     public float tolerance = 0.01f;
 
-    private Vector3? destination = null;
+    private GameObject? task;
+    private bool isActionCalled;
 
     protected override void OnStart() {
 
@@ -34,9 +35,9 @@ public class FirstTask : ActionNode
             if (blackboard.Tasks[0] != "sweep")
             {
 
-                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]);
+                task = ActionsMaster.instance.IHaveTo(blackboard.Tasks[0]);
 
-                if (destination == null)
+                if (task == null)
                 {
 
                     return State.Failure;
@@ -46,7 +47,7 @@ public class FirstTask : ActionNode
 
                 }
                 Debug.Log("La primera " + blackboard.Tasks[0] + " se esta ejecutando");
-                context.agent.destination = (Vector3)destination;
+                context.agent.destination = (Vector3)task.transform.position;
                 isExecuting = true;
 
             }
@@ -72,6 +73,15 @@ public class FirstTask : ActionNode
 
             if (context.agent.remainingDistance <= tolerance)
             {
+                if (isActionCalled)
+                {
+
+                    //ActionMaster.instance.startAction(blackboard.Tasks[0], task);
+
+                    isActionCalled = true;
+
+                }
+
                 timeOnTask += Time.deltaTime;
             }
 

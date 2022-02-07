@@ -11,7 +11,8 @@ public class SecondTask : ActionNode
 
     public float tolerance = 0.01f;
 
-    private Vector3? destination;
+    private GameObject? task;
+    private bool isActionCalled;
 
     protected override void OnStart()
     {
@@ -36,9 +37,9 @@ public class SecondTask : ActionNode
             if (blackboard.Tasks[1] != "sweep")
             {
 
-                destination = ActionsMaster.instance.IHaveTo(blackboard.Tasks[1]);
+                task = ActionsMaster.instance.IHaveTo(blackboard.Tasks[1]);
 
-                if (destination == null)
+                if (task == null)
                 {
 
                     return State.Failure;
@@ -48,7 +49,7 @@ public class SecondTask : ActionNode
 
                 }
 
-                context.agent.destination = (Vector3)destination;
+                context.agent.destination = (Vector3)task.transform.position;
                 isExecuting = true;
 
             } else
@@ -72,6 +73,15 @@ public class SecondTask : ActionNode
 
             if (context.agent.remainingDistance <= tolerance)
             {
+                if (isActionCalled)
+                {
+
+                    //ActionMaster.instance.startAction(blackboard.Tasks[1], task);
+
+                    isActionCalled = true;
+
+                }
+
                 timeOnTask += Time.deltaTime;
             }
 
