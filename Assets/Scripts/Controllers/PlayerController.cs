@@ -7,9 +7,10 @@ public class PlayerController : MonoBehaviour
 {
     public float vel = 6f;
     public NavMeshAgent playerNavt;
+    public GameObject player;
     public Camera cam;
 
-
+    bool arrived = true;
 
     // Start is called before the first frame update
     void Update()
@@ -21,8 +22,16 @@ public class PlayerController : MonoBehaviour
             if(Physics.Raycast(ray,out destino))
             {
                 playerNavt.SetDestination(destino.point);
+                player.GetComponent<PlayerActions>().enabled = false;
+                arrived = false;
             }
-        }   
+        }
+        
+        if (!arrived && Vector3.Distance(playerNavt.destination, player.transform.position) < 0.3f)
+        {
+            player.GetComponent<PlayerActions>().enabled = true;
+            arrived = true;
+        }
         
     }
 
