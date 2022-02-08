@@ -9,6 +9,8 @@ public class ActionsMaster : MonoBehaviour
     public GameObject pray;
     public GameObject candles;
     public GameObject relic;
+    public GameObject poison;
+    public GameObject preacher;
 
     public static ActionsMaster instance;
 
@@ -18,6 +20,8 @@ public class ActionsMaster : MonoBehaviour
 
     bool prayAssigned = false;
     bool watchAssigned = false;
+    bool poisonAssigned = false;
+    bool preacherAssigned = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -80,7 +84,7 @@ public class ActionsMaster : MonoBehaviour
                 if (!prayAssigned && !pray.gameObject.GetComponent<PrayController>().busy)
                 {
                     prayAssigned = true;
-                    StartCoroutine(WaitPray(3f));
+                    StartCoroutine(Wait("pray",3f));
                     return pray.gameObject;
                 }
                 break;
@@ -88,8 +92,24 @@ public class ActionsMaster : MonoBehaviour
                 if (!watchAssigned && !relic.gameObject.GetComponent<RelicController>().busy)
                 {
                     watchAssigned = true;
-                    StartCoroutine(WaitWatch(3f));
+                    StartCoroutine(Wait("watch",3f));
                     return relic.gameObject;
+                }
+                break;
+            case "speak":
+                if (!preacherAssigned && !preacher.gameObject.GetComponent<PreacherController>().busy)
+                {
+                    preacherAssigned = true;
+                    StartCoroutine(Wait("speak",3f));
+                    return preacher.gameObject;
+                }
+                break;
+            case "poison":
+                if (!poisonAssigned && !poison.gameObject.GetComponent<PreacherController>().busy)
+                {
+                    poisonAssigned = true;
+                    StartCoroutine(Wait("poison", 3f));
+                    return poison.gameObject;
                 }
                 break;
             case "lighter":
@@ -124,22 +144,45 @@ public class ActionsMaster : MonoBehaviour
                 actionTime = 5f;
                 other.GetComponent<RelicController>().watch(actionTime);
                 break;
+            case "speak":
+                //Debug.Log("Leyendo...");
+                actionTime = 5f;
+                other.GetComponent<PreacherController>().Speak(actionTime);
+                break;
+            case "poison":
+                //Debug.Log("Viendo la reliquia...");
+                actionTime = 5f;
+                other.GetComponent<PoisonController>().Poison(actionTime);
+                break;
             case "sweep":
                 break;
         }
         
     }
 
-    IEnumerator WaitPray(float time)
+    IEnumerator Wait(string currentTask, float time)
     {
-        //prayAssigned = true;
-        yield return new WaitForSeconds(time);
-        prayAssigned = false;
+        switch (currentTask)
+        {            
+            case "pray":
+                yield return new WaitForSeconds(time);
+                prayAssigned = false;
+                break;
+            
+            case "watch":
+                yield return new WaitForSeconds(time);
+                watchAssigned = false;
+                break;
+            case "speak":
+                yield return new WaitForSeconds(time);
+                poisonAssigned = false;
+                break;
+            case "poison":
+                yield return new WaitForSeconds(time);
+                preacherAssigned = false;
+                break;
+        }
     }
-    IEnumerator WaitWatch(float time)
-    {
-        //watchAssigned = true;
-        yield return new WaitForSeconds(time);
-        watchAssigned = false;
-    }
+
+    
 }

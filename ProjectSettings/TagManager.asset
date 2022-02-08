@@ -10,6 +10,7 @@ TagManager:
   - Relic
   - Pison
   - Candle
+  - UIButton
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,8 @@ TagManager:
   - Book
   - PrayingArea
   - WatchingArea
-  - 
-  - 
+  - Preacher
+  - Poison
   - 
   - 
   - 
