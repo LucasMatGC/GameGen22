@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public GameObject player;
     public GameObject eyeball;
     public GameObject playerstats;
+    public AudioSource heartbeat;
 
     public float timerEndOfGame = 300.0f;
 
@@ -116,6 +117,7 @@ public class GameController : MonoBehaviour
     {
 
         eyeball.SetActive(true);
+        heartbeat.Play();
         yield return new WaitForSeconds(1f);
         eyeball.SetActive(false);
 
