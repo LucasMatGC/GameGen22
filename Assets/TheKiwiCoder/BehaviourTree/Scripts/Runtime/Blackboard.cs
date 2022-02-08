@@ -26,6 +26,8 @@ namespace TheKiwiCoder {
 
         public string[] Tasks;
         public Vector3 RandomPosition;
+        public Vector2 min = new Vector2(-8.8f, -18.4f);
+        public Vector2 max = new Vector2(8.8f, 14.7f);  
 
     }
 }

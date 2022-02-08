@@ -8,8 +8,6 @@ public class MoveToRandomPosition : ActionNode
     public float timeOnTask = 0f;
     public float taskTime = 5f;
     public float threshold = 1f;
-    public Vector2 min = new Vector2(-8.8f, -18.4f);
-    public Vector2 max = new Vector2(8.8f, 14.7f);
     public bool isExecuting = false;
 
     public float tolerance = 1.0f;
@@ -34,7 +32,7 @@ public class MoveToRandomPosition : ActionNode
         {
 
             //Debug.Log("Toca movimiento aleatorio! Ha sido por probabilidad: " + (blackboard.priorityTask == 0 && blackboard.probability <= threshold));
-            blackboard.RandomPosition = new Vector3(Random.Range(min.x, max.x), 0f, Random.Range(min.y, max.y));
+            blackboard.RandomPosition = new Vector3(Random.Range(blackboard.min.x, blackboard.max.x), 0f, Random.Range(blackboard.min.y, blackboard.max.y));
             context.agent.destination = blackboard.RandomPosition;
             isExecuting = true;
 

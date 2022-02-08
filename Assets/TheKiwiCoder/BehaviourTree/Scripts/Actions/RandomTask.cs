@@ -10,7 +10,7 @@ public class RandomTask : ActionNode
     public float threshold = 1f;
     public bool isExecuting = false;
 
-    public float tolerance = 0.01f;
+    public float tolerance = 0.1f;
 
     private GameObject? task;
     private bool isActionActivated = false;
@@ -47,19 +47,17 @@ public class RandomTask : ActionNode
                 }
 
                 context.agent.destination = (Vector3)task.transform.position;
-                isExecuting = true;
 
             } else
             {
 
                 context.broomGO.SetActive(true);
-                isExecuting = true;
 
             }
-        context.actionBubble.GetComponent<Animator>().SetTrigger(blackboard.Tasks[3]);
 
+            isExecuting = true;
 
-    }
+        }
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
         {
@@ -69,13 +67,18 @@ public class RandomTask : ActionNode
         if (isExecuting)
         {
 
-            if (context.agent.remainingDistance <= tolerance)
+            if (context.agent.pathPending)
+                return State.Running;
+
+
+            if (context.agent.remainingDistance < tolerance)
             {
 
                 if (!isActionActivated)
                 {
 
                     ActionsMaster.instance.StartAction(blackboard.Tasks[3], task);
+                    context.actionBubble.GetComponent<Animator>().SetTrigger(blackboard.Tasks[3]);
                     isActionActivated = true;
 
                 }
@@ -91,17 +94,32 @@ public class RandomTask : ActionNode
             {
 
                 isExecuting = false;
+                context.actionBubble.GetComponent<Animator>().SetTrigger("stopActing"); 
 
                 if (context.broomGO.activeSelf)
                 {
 
                     context.broomGO.SetActive(false);
+                    return State.Success;
 
                 }
-                context.actionBubble.GetComponent<Animator>().SetTrigger("stopActing"); 
-                return State.Success;
+                else
+                {
+
+                    blackboard.RandomPosition = new Vector3(Random.Range(blackboard.min.x, blackboard.max.x), 0f, Random.Range(blackboard.min.y, blackboard.max.y));
+                    context.agent.destination = blackboard.RandomPosition;
+
+                }
 
             }
+        } else if (isActionActivated)
+        {
+
+            if (context.agent.pathPending)
+                return State.Running;
+
+            return State.Success;
+
         }
 
         return State.Failure;

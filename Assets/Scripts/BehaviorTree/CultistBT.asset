@@ -49,13 +49,13 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   timeOnTask: 0
   taskTime: 5
   threshold: 1
-  min: {x: -8.8, y: -18.4}
-  max: {x: 8.8, y: 14.7}
   isExecuting: 0
   tolerance: 1
 --- !u!114 &-1264524319666839463
@@ -87,6 +87,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   timeOnTask: 0
@@ -122,6 +124,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   children:
@@ -156,6 +160,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   child: {fileID: -807531404510567604}
@@ -190,6 +196,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   child: {fileID: 0}
@@ -232,6 +240,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
 --- !u!114 &2525073319750078487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +271,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   timeOnTask: 0
@@ -297,6 +309,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   timeOnTask: 0
@@ -332,6 +346,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   timeOnTask: 0
@@ -367,6 +383,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   child: {fileID: -570782146807142941}
@@ -399,6 +417,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   children:
@@ -437,6 +457,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   baseThreshold: 0.15
@@ -469,6 +491,8 @@ MonoBehaviour:
     priorityTask: 0
     Tasks: []
     RandomPosition: {x: 0, y: 0, z: 0}
+    min: {x: -8.8, y: -18.4}
+    max: {x: 8.8, y: 14.7}
   description: 
   drawGizmos: 0
   duration: 1

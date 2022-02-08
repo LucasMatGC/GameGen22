@@ -10,7 +10,7 @@ public class FirstTask : ActionNode
     public float taskTime = 5f;
     public bool isExecuting = false;
 
-    public float tolerance = 0.01f;
+    public float tolerance = 0.1f;
 
     private GameObject? task = null;
     private bool isActionActivated = false;
@@ -44,17 +44,15 @@ public class FirstTask : ActionNode
                 }
 
                 context.agent.destination = (Vector3)task.transform.position;
-                isExecuting = true;
 
-            }
-            else
+            } else
             {
             
                 context.broomGO.SetActive(true);
-                isExecuting = true;
 
             }
-            context.actionBubble.GetComponent<Animator>().SetTrigger(blackboard.Tasks[0]);
+
+            isExecuting = true;
         }
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
@@ -66,13 +64,17 @@ public class FirstTask : ActionNode
         if (isExecuting)
         {
 
-            if (context.agent.remainingDistance <= tolerance)
+            if (context.agent.pathPending)
+                return State.Running;
+
+            if (context.agent.remainingDistance < tolerance)
             {
 
                 if (!isActionActivated)
                 {
 
                     ActionsMaster.instance.StartAction(blackboard.Tasks[0], task);
+                    context.actionBubble.GetComponent<Animator>().SetTrigger(blackboard.Tasks[0]);
                     isActionActivated = true;
 
                 }
@@ -88,20 +90,33 @@ public class FirstTask : ActionNode
             {
 
                 isExecuting = false;
+                context.actionBubble.GetComponent<Animator>().SetTrigger("stopActing");
+                blackboard.firstTaskTime = Time.time + blackboard.maxTime;
 
                 if (context.broomGO.activeSelf)
                 {
 
                     context.broomGO.SetActive(false);
+                    return State.Success;
 
                 }
-                
-                context.actionBubble.GetComponent<Animator>().SetTrigger("stopActing");
+                else
+                {
 
-                blackboard.firstTaskTime = Time.time + blackboard.maxTime;
-                return State.Success;
+                    blackboard.RandomPosition = new Vector3(Random.Range(blackboard.min.x, blackboard.max.x), 0f, Random.Range(blackboard.min.y, blackboard.max.y));
+                    context.agent.destination = blackboard.RandomPosition;
+
+                }
 
             }
+        } else if (isActionActivated)
+        {
+
+            if (context.agent.pathPending)
+                return State.Running;
+
+            return State.Success;
+
         }
 
         return State.Failure;
