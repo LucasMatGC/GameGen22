@@ -85,7 +85,7 @@ public class GameController : MonoBehaviour
 
         isGameActive = false;
 
-        SceneManager.LoadScene("EndScreen"/*, LoadSceneMode.Single*/);
+        SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
 
     }
 

@@ -239,7 +239,7 @@ public class UIController : MonoBehaviour
         fadeOut.GetComponent<Animator>().SetBool("fadeOut", true);
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1;
-        if (sceneName != "exit") SceneManager.LoadScene(sceneName/*, LoadSceneMode.Single*/);
+        if (sceneName != "exit") SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         else Application.Quit();
     }
 
@@ -357,7 +357,7 @@ public class UIController : MonoBehaviour
         narrative.SetActive(true);
         isInNarrative = true;
         yield return new WaitForSeconds(60f);
-        SceneManager.LoadScene("FirstLevel");
+        SceneManager.LoadScene("FirstLevel", LoadSceneMode.Single);
 
     }
 

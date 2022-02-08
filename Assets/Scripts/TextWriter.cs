@@ -31,7 +31,7 @@ public class TextWriter : MonoBehaviour
 		
 	void Update () {
 		m_cumulativeDeltaTime += Time.deltaTime;
-        Debug.Log("m_cumulativeDeltaTime = " + m_cumulativeDeltaTime);
+        //Debug.Log("m_cumulativeDeltaTime = " + m_cumulativeDeltaTime);
 		while (m_cumulativeDeltaTime >= m_characterInterval && index < m_text.Length) {
             
             if (m_text[index] != separation)

@@ -194,6 +194,6 @@ public class EndScreenController : MonoBehaviour
         fadeOut.GetComponent<Animator>().SetBool("fadeOut", true);
         yield return new WaitForSeconds(1f);
         Destroy(GameObject.Find("PlayerStats"));
-        SceneManager.LoadScene("MainMenu"/*, LoadSceneMode.Single*/);
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 }
