@@ -53,11 +53,11 @@ public class ActionsGeneralController : MonoBehaviour
     {
         //(GameObject, bool) toFind = (tableTaken, true);
         int location = actionsList.FindIndex(x => x.Item1 == actionFree);
-        Debug.Log("accion libre location" + location);
+        //Debug.Log("accion libre location" + location);
         if (location != -1)
         {
             actionsList[location] = (actionFree, true);
-            Debug.Log("accion libre " + actionFree);
+            //Debug.Log("accion libre " + actionFree);
         }
         //else
         //{
