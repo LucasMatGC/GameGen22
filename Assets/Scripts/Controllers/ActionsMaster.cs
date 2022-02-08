@@ -206,4 +206,11 @@ public class ActionsMaster : MonoBehaviour
         return counterNPCs == 12;
 
     }
+
+    public List<string> GetMandatoryTasks()
+    {
+
+        return new List<string>{ selectedActions[0], selectedActions[1], selectedActions[2] };
+
+    }
 }

@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 {
     public GameObject player;
     public GameObject eyeball;
+    public GameObject playerstats;
 
     public float timerEndOfGame = 300.0f;
 
