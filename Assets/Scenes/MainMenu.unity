@@ -1460,7 +1460,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: b25baf72ca8cd8b4d912b5d99f573323, type: 3}
-  m_Type: 0
+  m_Type: 2
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1468,7 +1468,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 5
 --- !u!222 &309944394
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1597,7 +1597,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: b25baf72ca8cd8b4d912b5d99f573323, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1605,7 +1605,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 5
 --- !u!222 &323821635
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2585,7 +2585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &530516730
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6140,6 +6140,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1624311772}
     m_Modifications:
+    - target: {fileID: 1587200359995503737, guid: 127a2d05cf8adb94f9fa5889616abb08, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1587200359995503737, guid: 127a2d05cf8adb94f9fa5889616abb08, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1587200359995503738, guid: 127a2d05cf8adb94f9fa5889616abb08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6245,6 +6253,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1624311772}
     m_Modifications:
+    - target: {fileID: 1587200359995503737, guid: 127a2d05cf8adb94f9fa5889616abb08, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1587200359995503737, guid: 127a2d05cf8adb94f9fa5889616abb08, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1587200359995503738, guid: 127a2d05cf8adb94f9fa5889616abb08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
