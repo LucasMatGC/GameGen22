@@ -16,7 +16,11 @@ public class TextWriter : MonoBehaviour
 
 	private Text m_label;
 
-	void Awake () {
+    private char separation = ';';
+    private int index = 0;
+    private bool waiting = false;
+
+    void Awake () {
 		m_label = GetComponent<Text> ();
 	}
 	
@@ -27,10 +31,28 @@ public class TextWriter : MonoBehaviour
 		
 	void Update () {
 		m_cumulativeDeltaTime += Time.deltaTime;
-		while (m_cumulativeDeltaTime >= m_characterInterval && m_partialText.Length < m_text.Length) {
-			m_partialText += m_text[m_partialText.Length];
-			m_cumulativeDeltaTime -= m_characterInterval;
-		}
+        Debug.Log("m_cumulativeDeltaTime = " + m_cumulativeDeltaTime);
+		while (m_cumulativeDeltaTime >= m_characterInterval && index < m_text.Length) {
+            
+            if (m_text[index] != separation)
+            {
+                if (waiting)
+                {
+                    m_partialText = "";
+                    waiting = false;
+                }
+                m_partialText += m_text[index];
+                m_cumulativeDeltaTime -= m_characterInterval;
+            }
+            else
+            {
+                m_cumulativeDeltaTime = -3f;
+                waiting = true;
+            }
+            index += 1;
+
+
+        }
 		m_label.text = m_partialText;
 	}
 
