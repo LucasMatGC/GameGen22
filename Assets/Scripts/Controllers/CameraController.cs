@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     public GameObject playerGameObject;
     public float movementSpeed = 5f;
     public GameObject cameraGameOnject;
+    public float distance = 5f;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class CameraController : MonoBehaviour
         cameraGameOnject.transform.rotation = Quaternion.Lerp(cameraGameOnject.transform.rotation, newRotation, movementSpeed * Time.deltaTime);
         //Position
         Vector3 posicionPer = playerGameObject.transform.position;
-        Vector3 newPos = new Vector3(posicionPer.x - 5, posicionPer.y + 5, posicionPer.z - 5);
+        Vector3 newPos = new Vector3(posicionPer.x - distance, posicionPer.y + distance, posicionPer.z - distance);
         cameraGameOnject.transform.position = Vector3.Lerp(cameraGameOnject.transform.position, newPos, movementSpeed * Time.deltaTime);
     }
 }

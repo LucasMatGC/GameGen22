@@ -19,6 +19,7 @@ public class FirstTask : ActionNode
 
         timeOnTask = 0f;
         isExecuting = false;
+        isActionActivated = false;
 
     }
 

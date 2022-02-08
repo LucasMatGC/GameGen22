@@ -19,6 +19,7 @@ public class SecondTask : ActionNode
 
         timeOnTask = 0f;
         isExecuting = false;
+        isActionActivated = false;
 
     }
 

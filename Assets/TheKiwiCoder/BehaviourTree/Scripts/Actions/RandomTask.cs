@@ -21,6 +21,7 @@ public class RandomTask : ActionNode
         threshold = 1 - 2*((1 - blackboard.thirdThreshold)/3);
         timeOnTask = 0f;
         isExecuting = false;
+        isActionActivated = false;
 
     }
 

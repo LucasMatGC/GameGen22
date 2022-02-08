@@ -19,6 +19,7 @@ public class ThirdTask : ActionNode
 
         timeOnTask = 0f;
         isExecuting = false;
+        isActionActivated = false;
 
     }
 
