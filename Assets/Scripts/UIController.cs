@@ -19,9 +19,11 @@ public class UIController : MonoBehaviour
     public Animator cameraMovement;
     public GameObject controlsBG;
     public GameObject creditsBG;
+    public GameObject narrative;
 
     public bool isInControls = false;
     public bool isInCredits = false;
+    private bool isInNarrative = false;
 
     //Pause menu vars
     private bool pause = false;
@@ -108,6 +110,10 @@ public class UIController : MonoBehaviour
         {
             StartCoroutine(HideCredits());
         }
+        if (isInNarrative && Input.anyKey)
+        {
+            StartCoroutine(ChangeScene("FirstLevel"));
+        }
         
         if (currentSceneName == "FirstLevel" && readyToPause && Input.GetKeyDown(KeyCode.Escape)){
             PauseContinue();
@@ -179,7 +185,14 @@ public class UIController : MonoBehaviour
     }
 
     public void StartButton(){
-        StartCoroutine(ChangeScene("FirstLevel"));
+
+        if(currentSceneName == "MainMenu"){
+            StartCoroutine(StartNarrative());
+        } else
+        {
+            StartCoroutine(ChangeScene("FirstLevel"));
+        }
+
     }
 
     public void HowToButton(){
@@ -282,7 +295,7 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         pressAnyText.SetActive(true);
         Animator pressAnyAnimator = pressAnyText.GetComponent<Animator>();
-        pressAnyAnimator.SetBool("splashScreen", false);
+        pressAnyAnimator.SetBool("splashScreen", true);
         controlsBG.transform.GetChild(0).gameObject.SetActive(true);
         isInControls = true;
     }
@@ -290,13 +303,13 @@ public class UIController : MonoBehaviour
     public IEnumerator HideInstructions()
     {
 
+        isInControls = false;
         pressAnyText.SetActive(false);
         controlsBG.GetComponent<Animator>().SetBool("hide", true);
         controlsBG.SetActive(false);
         controlsBG.transform.GetChild(0).gameObject.SetActive(false);
         cameraMovement.SetBool("ControlsZoom", false);
         yield return new WaitForSeconds(3f);
-        isInControls = false;
         StartCoroutine("ActivateMainMenu");
     }
 
@@ -318,7 +331,7 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         pressAnyText.SetActive(true);
         Animator pressAnyAnimator = pressAnyText.GetComponent<Animator>();
-        pressAnyAnimator.SetBool("splashScreen", false);
+        pressAnyAnimator.SetBool("splashScreen", true);
         creditsBG.transform.GetChild(0).gameObject.SetActive(true);
         isInCredits = true;
     }
@@ -334,6 +347,16 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         isInCredits = false;
         StartCoroutine("ActivateMainMenu");
+    }
+
+    public IEnumerator StartNarrative()
+    {
+
+        narrative.SetActive(true);
+        isInNarrative = true;
+        yield return new WaitForSeconds(60f);
+        SceneManager.LoadScene("FirstLevel");
+
     }
 
 }
