@@ -5,15 +5,18 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject player;
+    public GameObject eyeball;
 
     public float timerEndOfGame = 300.0f;
+
+    public float maxTaskTime = 60f;
 
     public float timerForTask1;
     public float timerForTask2;
     public float timerForTask3;
 
     public int life = 3;
-
+    private bool isGameActive;
 
     public static GameController instance;
 
@@ -22,67 +25,95 @@ public class GameController : MonoBehaviour
         void Start()
     {
             instance = this;
-            timerForTask1 = 60f;
-        timerForTask2 = 60f;
-        timerForTask3 = 60f;
+            isGameActive = true;
+            timerForTask1 = maxTaskTime;
+            timerForTask2 = maxTaskTime;
+            timerForTask3 = maxTaskTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timerEndOfGame -= Time.deltaTime;
 
-        timerForTask1 -= Time.deltaTime;
-        timerForTask2 -= Time.deltaTime;
-        timerForTask3 -= Time.deltaTime;
+        if (isGameActive)
+        {
 
-        if (timerEndOfGame <= 0.0f)
-        {
-            ChooseMenu();
-        }
+            timerEndOfGame -= Time.deltaTime;
 
-        if (timerForTask1 <= 0.0f || timerForTask2 <= 0.0f || timerForTask3 <= 0.0f)
-        {
-            Damage();
-        }
-        if (life <= 0)
-        {
-            Defeat();
+            timerForTask1 -= Time.deltaTime;
+            timerForTask2 -= Time.deltaTime;
+            timerForTask3 -= Time.deltaTime;
+
+            if (timerEndOfGame <= 0.0f)
+            {
+                ChooseMenu();
+            }
+
+            if ((timerForTask1 <= 0.0f || timerForTask2 <= 0.0f || timerForTask3 <= 0.0f))
+            {
+                Damage();
+            }
+
+            if (life <= 0)
+            {
+                Defeat();
+            }
+
         }
 
     }
 
     public void ResetTimer1()
     {
-        timerForTask1 = 60.0f;
+        timerForTask1 = maxTaskTime;
     }
     public void ResetTimer2()
     {
-        timerForTask2 = 60.0f;
+        timerForTask2 = maxTaskTime;
     }
     public void ResetTimer3()
     {
-        timerForTask3 = 60.0f;
+        timerForTask3 = maxTaskTime;
     }
 
     void ChooseMenu()
     {
+
+        isGameActive = false;
+
         Debug.Log("Eleccion de las tareas");
     }
 
     void Damage()
     {
         life -= 1;
-        timerForTask1 = 60f;
-        timerForTask2 = 60f;
-        timerForTask3 = 60f;
-        Debug.Log("OUCH!");
+
+        if (timerForTask1 <= 0.0f)
+            timerForTask1 = maxTaskTime;
+
+        if (timerForTask2 <= 0.0f)
+            timerForTask2 = maxTaskTime;
+
+        if (timerForTask3 <= 0.0f)
+            timerForTask3 = maxTaskTime;
+
+        StartCoroutine(DamageAnimation());
     }
 
     void Defeat()
     {
+        isGameActive = false;
         player.GetComponent<PlayerController>().enabled = false;
         player.GetComponent<PlayerActions>().enabled = false;
         Debug.Log("YOU LOSE!");
+    }
+
+    IEnumerator DamageAnimation()
+    {
+
+        eyeball.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        eyeball.SetActive(false);
+
     }
 }

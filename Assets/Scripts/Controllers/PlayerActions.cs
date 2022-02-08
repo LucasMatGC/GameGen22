@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     public GameObject player;
+    public GameObject broom;
     public GameObject playerCamera;
     public GameObject actionMaster;
 
@@ -189,6 +190,7 @@ public class PlayerActions : MonoBehaviour
                 break;
             case "sweep":
                 //Debug.Log("Barriendo...");
+                broom.SetActive(doingTask);
                 actionTime = 5f;                
                 break;
         }
@@ -196,6 +198,7 @@ public class PlayerActions : MonoBehaviour
         playerCamera.GetComponent<CameraController>().enabled = true;
         player.GetComponent<PlayerController>().enabled = true;
         doingTask = false;
+        broom.SetActive(doingTask);
     }   
 
 
