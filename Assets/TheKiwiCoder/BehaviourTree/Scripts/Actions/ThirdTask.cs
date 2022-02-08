@@ -54,6 +54,7 @@ public class ThirdTask : ActionNode
                 isExecuting = true;
 
             }
+        context.actionBubble.GetComponent<Animator>().SetTrigger(blackboard.Tasks[2]);
 
 
     }
@@ -95,6 +96,7 @@ public class ThirdTask : ActionNode
                     context.broomGO.SetActive(false);
 
                 }
+                context.actionBubble.GetComponent<Animator>().SetTrigger("stopActing"); 
 
                 blackboard.thirdTaskTime = Time.time + blackboard.maxTime;
                 return State.Success;

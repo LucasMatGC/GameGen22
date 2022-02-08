@@ -20,6 +20,8 @@ namespace TheKiwiCoder {
         public CapsuleCollider capsuleCollider;
         public CharacterController characterController;
         public GameObject broomGO;
+
+        public GameObject actionBubble;
         // Add other game specific systems here
 
         public static Context CreateFromGameObject(GameObject gameObject) {
@@ -35,6 +37,8 @@ namespace TheKiwiCoder {
             context.capsuleCollider = gameObject.GetComponent<CapsuleCollider>();
             context.characterController = gameObject.GetComponent<CharacterController>();
             context.broomGO = gameObject.transform.GetChild(2).gameObject;
+
+            context.actionBubble = gameObject.transform.GetChild(3).gameObject;
 
             // Add whatever else you need here...
 
