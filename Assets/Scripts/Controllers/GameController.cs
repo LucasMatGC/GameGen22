@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -82,7 +83,8 @@ public class GameController : MonoBehaviour
 
         isGameActive = false;
 
-        Debug.Log("Eleccion de las tareas");
+        SceneManager.LoadScene("EndScreen"/*, LoadSceneMode.Single*/);
+
     }
 
     void Damage()

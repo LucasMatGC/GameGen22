@@ -736,10 +736,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e3d304a67061d4498bb341a205ce4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_text: 'Somehow, I managed to slip by unnoticed... I felt like I was constantly
-    being observed.;I   didn''t   feel   safe ...;The world needs to know how to
-    avoid this cult!;The cult followers were very keen on repeating 3 specific tasks.;Those
-    3 tasks were:'
+  m_text: 'Somehow, I managed to slip by unnoticed... I   didn''t   feel   safe ...;The
+    world needs to know how to avoid this cult!. The cult followers were very keen
+    on repeating 3 specific tasks.;Those 3 tasks were:'
   m_characterInterval: 0.0498
 --- !u!114 &376599742
 MonoBehaviour:

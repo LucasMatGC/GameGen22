@@ -1117,7 +1117,7 @@ MonoBehaviour:
   eyeball: {fileID: 302380467}
   playerstats: {fileID: 0}
   timerEndOfGame: 300
-  maxTaskTime: 120
+  maxTaskTime: 90
   timerForTask1: 0
   timerForTask2: 0
   timerForTask3: 0

@@ -17,8 +17,8 @@ public class EndScreenController : MonoBehaviour
     public GameObject finalCanvas;
     public GameObject scoreText;
     public GameObject finalText;
-    
-    private string[] unorderedAnswers = {"Sweep", "Light a candle", "Pray", "Touch the altar", "Speak with cultmaster", "Read a book", "Improve potion"};
+
+    private string[] unorderedAnswers = {"Sweep", "Light a candle", "Pray", "Touch the altar", "Speak with cultmaster", "Read a book", "Poison the potion"};
     private PlayerStats playerStats;
     private List<string> correctAnswers;
     private string tempStr;
@@ -44,7 +44,7 @@ public class EndScreenController : MonoBehaviour
     }
 
     private IEnumerator waitForFlairText(){
-        yield return new WaitForSeconds(23f);
+        yield return new WaitForSeconds(18f);
         for (int i = 0; i < optionButtons.Length; i++){
             optionButtons[i].SetActive(true);
         }
@@ -129,16 +129,41 @@ public class EndScreenController : MonoBehaviour
         StartCoroutine(FinalMessage());
         
         for (int i = 0; i < pickedAnswers.Count; i++){
-            if (correctAnswers.Contains(pickedAnswers[i])){
+            string shortAnswer;
+            switch (pickedAnswers[i]){
+                case "Sweep":
+                    shortAnswer = "sweep";
+                    break;
+                case "Light a candle":
+                    shortAnswer = "lighter";
+                    break;
+                case "Pray":
+                    shortAnswer = "pray";
+                    break;
+                case "Touch the altar":
+                    shortAnswer = "watch";
+                    break;
+                case "Speak with cultmaster":
+                    shortAnswer = "speak";
+                    break;
+                case "Read a book":
+                    shortAnswer = "read";
+                    break;
+                default:
+                    shortAnswer = "poison";
+                    break;
+            }
+            if (correctAnswers.Contains(shortAnswer)){
                 finalScore++;
             }
         }
     }
 
     private IEnumerator FinalMessage(){
-        yield return new WaitForSeconds(1f);
-
         fadeOut.GetComponent<Animator>().SetBool("fadeOut", true);
+
+        yield return new WaitForSeconds(1f);
+    
         finalCanvas.SetActive(true);
         mainCanvas.SetActive(false);
         confirmCanvas.SetActive(false);
@@ -168,6 +193,7 @@ public class EndScreenController : MonoBehaviour
         fadeOut.SetActive(true);
         fadeOut.GetComponent<Animator>().SetBool("fadeOut", true);
         yield return new WaitForSeconds(1f);
+        Destroy(GameObject.Find("PlayerStats"));
         SceneManager.LoadScene("MainMenu"/*, LoadSceneMode.Single*/);
     }
 }
