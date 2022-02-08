@@ -16,12 +16,14 @@ public class PlayerActions : MonoBehaviour
     bool doingTask = false;
     int dontYouDare = 0;
 
-    Collider encendedorCollider;
-    Collider rezarCollider;
-    Collider leerCollider;
-    Collider reliquiaCollider;
+    Collider lighterCollider;
+    Collider prayCollider;
+    Collider readCollider;
+    Collider relicCollider;
+    Collider poisonCollider;
+    Collider preacherCollider;
 
-    
+
 
     void Start()
     {
@@ -37,47 +39,45 @@ public class PlayerActions : MonoBehaviour
             switch (task)
             {
                 case "lighter":
-                    if (!encendedorCollider.gameObject.GetComponent<CandleController>().busy)
+                    if (!lighterCollider.gameObject.GetComponent<CandleController>().busy)
                     {
-                        StartCoroutine(startAction(task, encendedorCollider));
-                    }
-                    //else
-                    //{
-                    //    Debug.Log("La vela ya esta encendida, tienes que esperar a que se apague :(");
-                    //}
+                        StartCoroutine(startAction(task, lighterCollider));
+                    }                    
                     break;
 
                 case "pray":
-                    if (!rezarCollider.gameObject.GetComponent<PrayController>().busy)
+                    if (!prayCollider.gameObject.GetComponent<PrayController>().busy)
                     {
-                        StartCoroutine(startAction(task, rezarCollider));
-                    }
-                    //else
-                    //{
-                    //    Debug.Log("Ya hay alguien rezando, espera a que este libre");
-                    //}
+                        StartCoroutine(startAction(task, prayCollider));
+                    }                    
                     break;
 
                 case "read":
-                    if (!leerCollider.gameObject.GetComponent<TableController>().busy)
+                    if (!readCollider.gameObject.GetComponent<TableController>().busy)
                     {
-                        StartCoroutine(startAction(task, leerCollider));
-                    }
-                    //else
-                    //{
-                    //    Debug.Log("Ya hay alguien leyendo en este sitio, espera a que este libre o busca otro");
-                    //}
+                        StartCoroutine(startAction(task, readCollider));
+                    }                    
                     break;
 
                 case "watch":
-                    if (!reliquiaCollider.gameObject.GetComponent<RelicController>().busy)
+                    if (!relicCollider.gameObject.GetComponent<RelicController>().busy)
                     {
-                        StartCoroutine(startAction(task, reliquiaCollider));
+                        StartCoroutine(startAction(task, relicCollider));
+                    }                    
+                    break;
+
+                case "poison":
+                    if (!poisonCollider.gameObject.GetComponent<PoisonController>().busy)
+                    {
+                        StartCoroutine(startAction(task, relicCollider));
                     }
-                    //else
-                    //{
-                    //    Debug.Log("Ya hay alguien leyendo en este sitio, espera a que este libre o busca otro");
-                    //}
+                    break;
+
+                case "speak":
+                    if (!preacherCollider.gameObject.GetComponent<PreacherController>().busy)
+                    {
+                        StartCoroutine(startAction(task, relicCollider));
+                    }
                     break;
 
                 default:
@@ -111,19 +111,27 @@ public class PlayerActions : MonoBehaviour
         {
             case 7:
                 task = "lighter";
-                encendedorCollider = other;
+                lighterCollider = other;
                 break;
             case 9:
                 task = "pray";
-                rezarCollider = other;
+                prayCollider = other;
                 break;
             case 8:
                 task = "read";
-                leerCollider = other;
+                readCollider = other;
                 break;
             case 10:
                 task = "watch";
-                reliquiaCollider = other;
+                relicCollider = other;
+                break;
+            case 11:
+                task = "speak";
+                preacherCollider = other;
+                break;
+            case 12:
+                task = "poison";
+                poisonCollider = other;
                 break;
         }
     }
@@ -187,6 +195,16 @@ public class PlayerActions : MonoBehaviour
                 //Debug.Log("Viendo la reliquia...");
                 actionTime = 5f;
                 other.gameObject.GetComponent<RelicController>().watch(actionTime);
+                break;
+            case "speak":
+                //Debug.Log("Leyendo...");
+                actionTime = 5f;
+                other.gameObject.GetComponent<PreacherController>().Speak(actionTime);
+                break;
+            case "poison":
+                //Debug.Log("Viendo la reliquia...");
+                actionTime = 5f;
+                other.gameObject.GetComponent<PoisonController>().Poison(actionTime);
                 break;
             case "sweep":
                 //Debug.Log("Barriendo...");
