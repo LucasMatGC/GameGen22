@@ -10,7 +10,7 @@ public class CalculatePriority : ActionNode
 
     protected override void OnStart() {
 
-        if (blackboard.firstTaskTime == 0f)
+        if (!ActionsMaster.instance.AreNewActions() && blackboard.Tasks.Length == 0)
         {
 
             UpdateTaskTime(1);

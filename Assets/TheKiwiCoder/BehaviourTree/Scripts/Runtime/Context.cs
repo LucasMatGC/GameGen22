@@ -13,6 +13,7 @@ namespace TheKiwiCoder {
         public GameObject gameObject;
         public Transform transform;
         public Animator animator;
+        public AudioSource sfx;
         public Rigidbody physics;
         public NavMeshAgent agent;
         public SphereCollider sphereCollider;
@@ -29,16 +30,17 @@ namespace TheKiwiCoder {
             Context context = new Context();
             context.gameObject = gameObject;
             context.transform = gameObject.transform;
-            context.animator = gameObject.GetComponent<Animator>();
+            context.animator = gameObject.GetComponentInChildren<Animator>();
+            context.sfx = gameObject.GetComponent<AudioSource>();
             context.physics = gameObject.GetComponent<Rigidbody>();
             context.agent = gameObject.GetComponent<NavMeshAgent>();
             context.sphereCollider = gameObject.GetComponent<SphereCollider>();
             context.boxCollider = gameObject.GetComponent<BoxCollider>();
             context.capsuleCollider = gameObject.GetComponent<CapsuleCollider>();
             context.characterController = gameObject.GetComponent<CharacterController>();
-            context.broomGO = gameObject.transform.GetChild(2).gameObject;
+            context.broomGO = gameObject.transform.GetChild(0).gameObject.transform.GetChild(2).gameObject;
 
-            context.actionBubble = gameObject.transform.GetChild(3).gameObject;
+            context.actionBubble = gameObject.transform.GetChild(0).gameObject.transform.GetChild(3).gameObject;
 
             // Add whatever else you need here...
 

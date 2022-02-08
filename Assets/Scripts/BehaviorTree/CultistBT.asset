@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: FirstTask
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: ff1163f49f692cd48a8edecaf4bdedf0
   position: {x: -203, y: 305}
   blackboard:
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: Sequencer
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: ddeb9f23fb6157847a035daefd38863f
   position: {x: -17, y: -100}
   blackboard:
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: Repeat
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: e8a1a7957df059d4b827aa7cdf36f83e
   position: {x: -17, y: -213}
   blackboard:
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: 344990aed8bee1f4d8dd02faf3df1639
   position: {x: -17, y: -314}
   blackboard:
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Name: Selector
   m_EditorClassIdentifier: 
   state: 0
-  started: 0
+  started: 1
   guid: cba8c120c81347140819575d00c99c7e
   position: {x: 180, y: 123}
   blackboard:
@@ -440,22 +440,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895a43089a4e8034fa3a87bb37384ff4, type: 3}
   m_Name: CalculatePriority
   m_EditorClassIdentifier: 
-  state: 0
+  state: 2
   started: 0
   guid: 68381ef666166a14590c278eac57c804
   position: {x: -265, y: 125}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
-    firstThreshold: 0
-    secondThreshold: 0
-    thirdThreshold: 0
-    firstTaskTime: 0
-    secondTaskTime: 0
-    thirdTaskTime: 0
+    firstThreshold: 0.15
+    secondThreshold: 0.3
+    thirdThreshold: 0.45000002
+    firstTaskTime: 80
+    secondTaskTime: 80
+    thirdTaskTime: 80
     maxTime: 80
-    probability: 0
+    probability: 0.02921617
     priorityTask: 0
-    Tasks: []
+    Tasks:
+    - read
+    - pray
+    - watch
+    - poison
     RandomPosition: {x: 0, y: 0, z: 0}
     min: {x: -8.8, y: -18.4}
     max: {x: 8.8, y: 14.7}

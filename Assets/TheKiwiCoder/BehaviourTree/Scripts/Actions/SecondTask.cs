@@ -45,6 +45,8 @@ public class SecondTask : ActionNode
                 }
 
                 context.agent.destination = (Vector3)task.transform.position;
+                context.animator.enabled = true;
+                context.sfx.enabled = true;
 
             } else
             {
@@ -76,6 +78,8 @@ public class SecondTask : ActionNode
                     ActionsMaster.instance.StartAction(blackboard.Tasks[1], task);
                     context.actionBubble.GetComponent<Animator>().SetTrigger(blackboard.Tasks[1]);
                     isActionActivated = true;
+                    context.animator.enabled = false;
+                    context.sfx.enabled = false;
 
                 }
 
@@ -92,6 +96,7 @@ public class SecondTask : ActionNode
                 isExecuting = false;
                 context.actionBubble.GetComponent<Animator>().SetTrigger("stopActing");
                 blackboard.secondTaskTime = Time.time + blackboard.maxTime;
+                context.broomGO.SetActive(false);
 
                 //if (context.broomGO.activeSelf)
                 //{

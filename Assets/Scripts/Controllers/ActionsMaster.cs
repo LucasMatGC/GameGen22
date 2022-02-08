@@ -23,11 +23,15 @@ public class ActionsMaster : MonoBehaviour
     bool watchAssigned = false;
     bool poisonAssigned = false;
     bool preacherAssigned = false;
+
+    private int counterNPCs = 0;
     // Start is called before the first frame update
     void Start()
     {
 
         instance = this;
+
+        counterNPCs = 0;
 
         var rnd = new System.Random();
         int first = rnd.Next(5);
@@ -80,6 +84,7 @@ public class ActionsMaster : MonoBehaviour
         }
         seedyOption = !seedyOption;
         string[] newActions = { selectedActions[0], selectedActions[1], selectedActions[2], optional };
+        counterNPCs++;
         return newActions;
     }
 
@@ -195,5 +200,10 @@ public class ActionsMaster : MonoBehaviour
         }
     }
 
-    
+    public bool AreNewActions()
+    {
+
+        return counterNPCs == 12;
+
+    }
 }
