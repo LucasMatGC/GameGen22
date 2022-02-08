@@ -16,7 +16,13 @@ public class UIController : MonoBehaviour
 
     public GameObject logo;
     public GameObject pressAnyText;
-    
+    public Animator cameraMovement;
+    public GameObject controlsBG;
+    public GameObject creditsBG;
+
+    public bool isInControls = false;
+    public bool isInCredits = false;
+
     //Pause menu vars
     private bool pause = false;
     private GameObject player;
@@ -25,6 +31,11 @@ public class UIController : MonoBehaviour
 
     public GameObject pauseCanvas;
     public GameObject postProcessingVolume;
+
+    public GameObject deathCanvas;
+    public GameObject deathBG;
+    public GameObject[] deathButtons;
+    public Text deathText;
 
     //Common vars
     string currentSceneName;
@@ -35,10 +46,6 @@ public class UIController : MonoBehaviour
     public GameObject[] menuButtons;
     public GameObject fadeOut;
 
-    public GameObject deathCanvas;
-    public GameObject deathBG;
-    public GameObject[] deathButtons;
-    public Text deathText;
 
     //Lerping vars
     private float minWeight = 0f;
@@ -91,6 +98,15 @@ public class UIController : MonoBehaviour
         if (splashActive && Input.anyKey){
             StartCoroutine("ActivateMainMenu");
             splashActive = false;
+        }
+
+        if (isInControls && Input.anyKey)
+        {
+            StartCoroutine(HideInstructions());
+        }
+        if (isInCredits && Input.anyKey)
+        {
+            StartCoroutine(HideCredits());
         }
         
         if (currentSceneName == "FirstLevel" && readyToPause && Input.GetKeyDown(KeyCode.Escape)){
@@ -167,11 +183,11 @@ public class UIController : MonoBehaviour
     }
 
     public void HowToButton(){
-        //stuff
+        StartCoroutine(ShowInstructions());
     }
 
     public void CreditsButton(){
-        //stuff
+        StartCoroutine(ShowCredits());
     }
 
     public void ExitButton(){
@@ -247,4 +263,77 @@ public class UIController : MonoBehaviour
             yield return new WaitForSecondsRealtime(.1f);
         }
     }
+
+    public IEnumerator ShowInstructions()
+    {
+        buttonBG.SetActive(false);
+        logo.SetActive(false);
+        foreach (GameObject button in menuButtons)
+        {
+            button.GetComponent<Image>().enabled = false;
+            button.transform.GetChild(0).GetComponent<Text>().enabled = false;
+        }
+        yield return new WaitForSeconds(1f);
+
+        cameraMovement.SetBool("ControlsZoom", true);
+        yield return new WaitForSeconds(4f);
+        controlsBG.SetActive(true);
+        controlsBG.GetComponent<Animator>().SetBool("hide", false);
+        yield return new WaitForSeconds(.5f);
+        pressAnyText.SetActive(true);
+        Animator pressAnyAnimator = pressAnyText.GetComponent<Animator>();
+        pressAnyAnimator.SetBool("splashScreen", false);
+        controlsBG.transform.GetChild(0).gameObject.SetActive(true);
+        isInControls = true;
+    }
+
+    public IEnumerator HideInstructions()
+    {
+
+        pressAnyText.SetActive(false);
+        controlsBG.GetComponent<Animator>().SetBool("hide", true);
+        controlsBG.SetActive(false);
+        controlsBG.transform.GetChild(0).gameObject.SetActive(false);
+        cameraMovement.SetBool("ControlsZoom", false);
+        yield return new WaitForSeconds(3f);
+        isInControls = false;
+        StartCoroutine("ActivateMainMenu");
+    }
+
+    public IEnumerator ShowCredits()
+    {
+        buttonBG.SetActive(false);
+        logo.SetActive(false);
+        foreach (GameObject button in menuButtons)
+        {
+            button.GetComponent<Image>().enabled = false;
+            button.transform.GetChild(0).GetComponent<Text>().enabled = false;
+        }
+        yield return new WaitForSeconds(1f);
+
+        cameraMovement.SetBool("CreditsZoom", true);
+        yield return new WaitForSeconds(4f);
+        creditsBG.SetActive(true);
+        creditsBG.GetComponent<Animator>().SetBool("hide", false);
+        yield return new WaitForSeconds(.5f);
+        pressAnyText.SetActive(true);
+        Animator pressAnyAnimator = pressAnyText.GetComponent<Animator>();
+        pressAnyAnimator.SetBool("splashScreen", false);
+        creditsBG.transform.GetChild(0).gameObject.SetActive(true);
+        isInCredits = true;
+    }
+
+    public IEnumerator HideCredits()
+    {
+
+        pressAnyText.SetActive(false);
+        creditsBG.GetComponent<Animator>().SetBool("hide", true);
+        creditsBG.SetActive(false);
+        creditsBG.transform.GetChild(0).gameObject.SetActive(false);
+        cameraMovement.SetBool("CreditsZoom", false);
+        yield return new WaitForSeconds(3f);
+        isInCredits = false;
+        StartCoroutine("ActivateMainMenu");
+    }
+
 }
