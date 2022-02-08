@@ -56,6 +56,7 @@ public class RandomTask : ActionNode
                 isExecuting = true;
 
             }
+        context.actionBubble.GetComponent<Animator>().SetTrigger(blackboard.Tasks[3]);
 
 
     }
@@ -97,7 +98,7 @@ public class RandomTask : ActionNode
                     context.broomGO.SetActive(false);
 
                 }
-                                
+                context.actionBubble.GetComponent<Animator>().SetTrigger("stopActing"); 
                 return State.Success;
 
             }

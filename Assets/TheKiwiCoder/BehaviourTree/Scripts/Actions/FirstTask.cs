@@ -54,7 +54,7 @@ public class FirstTask : ActionNode
                 isExecuting = true;
 
             }
-
+            context.actionBubble.GetComponent<Animator>().SetTrigger(blackboard.Tasks[0]);
         }
 
         if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
@@ -95,6 +95,8 @@ public class FirstTask : ActionNode
                     context.broomGO.SetActive(false);
 
                 }
+                
+                context.actionBubble.GetComponent<Animator>().SetTrigger("stopActing");
 
                 blackboard.firstTaskTime = Time.time + blackboard.maxTime;
                 return State.Success;
