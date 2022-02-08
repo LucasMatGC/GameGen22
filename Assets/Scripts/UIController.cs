@@ -209,7 +209,8 @@ public class UIController : MonoBehaviour
         fadeOut.SetActive(true);
         fadeOut.GetComponent<Animator>().SetBool("fadeOut", true);
         yield return new WaitForSecondsRealtime(1f);
-        if (sceneName != "exit") SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        Time.timeScale = 1;
+        if (sceneName != "exit") SceneManager.LoadScene(sceneName/*, LoadSceneMode.Single*/);
         else Application.Quit();
     }
 

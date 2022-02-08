@@ -10,6 +10,7 @@ public class TableController : MonoBehaviour
     public GameObject openBook;
     public GameObject closeBook;
     public GameObject clonedBooksStorage;
+    public AudioSource sfx;
 
     private void Start()
     {
@@ -53,6 +54,7 @@ public class TableController : MonoBehaviour
         opendCloseBook.transform.SetParent(clonedBooksStorage.transform);
         clonedCloseBook.SetActive(false);
         opendCloseBook.SetActive(true);
+        sfx.Play();
         yield return new WaitForSeconds(booking / 2);
 
         clonedCloseBook.SetActive(true);
