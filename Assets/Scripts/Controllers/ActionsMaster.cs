@@ -14,9 +14,10 @@ public class ActionsMaster : MonoBehaviour
 
     public static ActionsMaster instance;
 
-    string[] actions = { "read", "pray", "watch", "sweep", "lighter" };
+    string[] actions = { "read", "pray", "watch", "sweep", "lighter","poison","speak" };
     string[] selectedActions = { "", "", "" };
     string[] optionalActions;
+    bool seedyOption = false;
 
     bool prayAssigned = false;
     bool watchAssigned = false;
@@ -68,7 +69,17 @@ public class ActionsMaster : MonoBehaviour
     {
         var rnd = new System.Random();
         int i = rnd.Next(2);
-        string[] newActions = { selectedActions[0], selectedActions[1], selectedActions[2], optionalActions[i] };
+        string optional;
+        if (!seedyOption)
+        {
+            optional = optionalActions[i];  
+        }
+        else
+        {
+            optional = optionalActions[i+2];            
+        }
+        seedyOption = !seedyOption;
+        string[] newActions = { selectedActions[0], selectedActions[1], selectedActions[2], optional };
         return newActions;
     }
 
