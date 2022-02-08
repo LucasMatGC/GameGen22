@@ -93,31 +93,36 @@ public class SecondTask : ActionNode
                 context.actionBubble.GetComponent<Animator>().SetTrigger("stopActing");
                 blackboard.secondTaskTime = Time.time + blackboard.maxTime;
 
-                if (context.broomGO.activeSelf)
-                {
+                //if (context.broomGO.activeSelf)
+                //{
+                //
+                //    context.broomGO.SetActive(false);
+                //    //return State.Success;
+                //
+                //}
+                //else
+                //{
+                //
+                //    blackboard.RandomPosition = new Vector3(Random.Range(blackboard.min.x, blackboard.max.x), 0f, Random.Range(blackboard.min.y, blackboard.max.y));
+                //    context.agent.destination = blackboard.RandomPosition;
+                //    return State.Running;
+                //
+                //}
 
-                    context.broomGO.SetActive(false);
-                    return State.Success;
-
-                }
-                else
-                {
-
-                    blackboard.RandomPosition = new Vector3(Random.Range(blackboard.min.x, blackboard.max.x), 0f, Random.Range(blackboard.min.y, blackboard.max.y));
-                    context.agent.destination = blackboard.RandomPosition;
-
-                }
+                return State.Success;
 
             }
-        } else if (isActionActivated)
-        {
-
-            if (context.agent.pathPending)
-                return State.Running;
-
-            return State.Success;
-
         }
+
+        //if (context.agent.pathPending)
+        //{
+        //    return State.Running;
+        //}
+        //
+        //if (context.agent.remainingDistance < tolerance)
+        //{
+        //    return State.Success;
+        //}
 
         return State.Failure;
 
