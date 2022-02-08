@@ -105,6 +105,7 @@ public class GameController : MonoBehaviour
         isGameActive = false;
         player.GetComponent<PlayerController>().enabled = false;
         player.GetComponent<PlayerActions>().enabled = false;
+        UIController.instance.DeathMenu();
         Debug.Log("YOU LOSE!");
     }
 

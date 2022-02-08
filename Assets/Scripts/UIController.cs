@@ -11,7 +11,8 @@ public class UIController : MonoBehaviour
 {
     //Main menu vars
     private bool splashActive = false;
-    
+
+    public static UIController instance;
 
     public GameObject logo;
     public GameObject pressAnyText;
@@ -34,6 +35,10 @@ public class UIController : MonoBehaviour
     public GameObject[] menuButtons;
     public GameObject fadeOut;
 
+    public GameObject deathCanvas;
+    public GameObject deathBG;
+    public GameObject[] deathButtons;
+    public Text deathText;
 
     //Lerping vars
     private float minWeight = 0f;
@@ -59,10 +64,14 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
+
+        instance = this;
+
         // Create a temporary reference to the current scene.
         Scene currentScene = SceneManager.GetActiveScene();
         currentSceneName = currentScene.name;
         menuButtons = GameObject.FindGameObjectsWithTag("UIButton");
+        deathButtons = GameObject.FindGameObjectsWithTag("DeathButton");
         myEventSystem = GameObject.Find("EventSystem");
 
         if (currentSceneName == "MainMenu"){
@@ -208,5 +217,33 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(1);
         fadeOut.SetActive(false);
         pauseCanvas.GetComponent<Canvas>().enabled = false;
+    }
+
+    public void DeathMenu()
+    {
+
+        Bloom bloom;
+        postProcessingVolume.GetComponent<PostProcessVolume>().profile.TryGetSettings(out bloom);
+        bloom.color.value = colors[Random.Range(0, colors.Length)];
+        Time.timeScale = 0;
+        blurLerp = 1;
+        deathBG.GetComponent<Image>().enabled = true;
+        deathCanvas.GetComponent<Canvas>().enabled = true;
+        StartCoroutine(ShowDeathButtons());
+        
+    }
+
+    private IEnumerator ShowDeathButtons()
+    {
+        deathBG.GetComponent<Animator>().SetBool("hide", false);
+
+        yield return new WaitForSecondsRealtime(.1f);
+        deathText.enabled = true;
+        foreach (GameObject button in deathButtons)
+        {
+            button.GetComponent<Image>().enabled = true;
+            button.transform.GetChild(0).GetComponent<Text>().enabled = true;
+            yield return new WaitForSecondsRealtime(.1f);
+        }
     }
 }
