@@ -69,14 +69,14 @@ public class PlayerActions : MonoBehaviour
                 case "poison":
                     if (!poisonCollider.gameObject.GetComponent<PoisonController>().busy)
                     {
-                        StartCoroutine(startAction(task, relicCollider));
+                        StartCoroutine(startAction(task, poisonCollider));
                     }
                     break;
 
                 case "speak":
                     if (!preacherCollider.gameObject.GetComponent<PreacherController>().busy)
                     {
-                        StartCoroutine(startAction(task, relicCollider));
+                        StartCoroutine(startAction(task, preacherCollider));
                     }
                     break;
 
@@ -141,7 +141,7 @@ public class PlayerActions : MonoBehaviour
         if (dontYouDare == 0)
         {
             int layerExit = other.gameObject.layer;
-            if (7 <= layerExit && layerExit <= 10)
+            if (7 <= layerExit && layerExit <= 12)
             {
                 task = "";
             }
@@ -177,37 +177,37 @@ public class PlayerActions : MonoBehaviour
         switch (currentTask)
         {
             case "lighter":
-                //Debug.Log("Encendiendo... vela");
+                Debug.Log("Encendiendo... vela");
                 actionTime = 5f;
                 other.gameObject.GetComponent<CandleController>().lightCandle(actionTime);
                 break;
             case "pray":
-                //Debug.Log("Rezando...");
+                Debug.Log("Rezando...");
                 actionTime = 5f;        
                 other.gameObject.GetComponent<PrayController>().pray(actionTime);
                 break;
             case "read":
-                //Debug.Log("Leyendo...");
+                Debug.Log("Leyendo...");
                 actionTime = 5f;
                 other.gameObject.GetComponent<TableController>().read(actionTime);
                 break;
             case "watch":
-                //Debug.Log("Viendo la reliquia...");
+                Debug.Log("Viendo la reliquia...");
                 actionTime = 5f;
                 other.gameObject.GetComponent<RelicController>().watch(actionTime);
                 break;
             case "speak":
-                //Debug.Log("Leyendo...");
+                Debug.Log("Preaching...");
                 actionTime = 5f;
                 other.gameObject.GetComponent<PreacherController>().Speak(actionTime);
                 break;
             case "poison":
-                //Debug.Log("Viendo la reliquia...");
+                Debug.Log("Envenenando...");
                 actionTime = 5f;
                 other.gameObject.GetComponent<PoisonController>().Poison(actionTime);
                 break;
             case "sweep":
-                //Debug.Log("Barriendo...");
+                Debug.Log("Barriendo...");
                 broom.SetActive(doingTask);
                 actionTime = 5f;                
                 break;
