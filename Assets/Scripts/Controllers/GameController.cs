@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public GameObject player;
     public GameObject eyeball;
     public GameObject playerstats;
+    public GameObject warning1, warning2;
     public AudioSource heartbeat;
 
     public float timerEndOfGame = 300.0f;
@@ -92,6 +93,15 @@ public class GameController : MonoBehaviour
     {
         life -= 1;
 
+        if (life == 2)
+        {
+            warning1.SetActive(true);
+
+        } else if (life == 1)
+        {
+            warning2.SetActive(true);
+        }
+
         if (timerForTask1 <= 0.0f)
             timerForTask1 = maxTaskTime;
 
@@ -106,6 +116,8 @@ public class GameController : MonoBehaviour
 
     void Defeat()
     {
+        warning1.SetActive(false);
+        warning2.SetActive(false);
         isGameActive = false;
         player.GetComponent<PlayerController>().enabled = false;
         player.GetComponent<PlayerActions>().enabled = false;
