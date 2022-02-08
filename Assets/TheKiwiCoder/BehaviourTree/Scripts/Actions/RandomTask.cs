@@ -47,6 +47,8 @@ public class RandomTask : ActionNode
                 }
 
                 context.agent.destination = (Vector3)task.transform.position;
+                context.animator.enabled = true;
+                context.sfx.enabled = true;
 
             } else
             {
@@ -80,6 +82,8 @@ public class RandomTask : ActionNode
                     ActionsMaster.instance.StartAction(blackboard.Tasks[3], task);
                     context.actionBubble.GetComponent<Animator>().SetTrigger(blackboard.Tasks[3]);
                     isActionActivated = true;
+                    context.animator.enabled = false;
+                    context.sfx.enabled = false;
 
                 }
 
@@ -94,7 +98,8 @@ public class RandomTask : ActionNode
             {
 
                 isExecuting = false;
-                context.actionBubble.GetComponent<Animator>().SetTrigger("stopActing"); 
+                context.actionBubble.GetComponent<Animator>().SetTrigger("stopActing");
+                context.broomGO.SetActive(false);
 
                 //if (context.broomGO.activeSelf)
                 //{

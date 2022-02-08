@@ -35,6 +35,8 @@ public class MoveToRandomPosition : ActionNode
             blackboard.RandomPosition = new Vector3(Random.Range(blackboard.min.x, blackboard.max.x), 0f, Random.Range(blackboard.min.y, blackboard.max.y));
             context.agent.destination = blackboard.RandomPosition;
             isExecuting = true;
+            context.animator.enabled = true;
+            context.sfx.enabled = true;
 
 
         }
@@ -59,6 +61,8 @@ public class MoveToRandomPosition : ActionNode
             {
 
                 isExecuting = false;
+                context.animator.enabled = false;
+                context.sfx.enabled = false;
 
                 //Debug.Log("Finalizada movimiento aleatorio!");
                 return State.Success;
