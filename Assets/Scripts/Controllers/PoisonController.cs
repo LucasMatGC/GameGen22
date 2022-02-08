@@ -5,6 +5,7 @@ using UnityEngine;
 public class PoisonController : MonoBehaviour
 {
     public bool busy = false;
+    public AudioSource sfx;
 
     public void Poison(float booking)
     {
@@ -20,6 +21,7 @@ public class PoisonController : MonoBehaviour
     {
         //Debug.Log("Rezando");
         yield return new WaitForSeconds(booking);
+        sfx.Play();
         //Debug.Log("Accion terminada");
         busy = false;
     }

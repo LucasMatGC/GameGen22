@@ -116,7 +116,7 @@ public class ActionsMaster : MonoBehaviour
                 }
                 break;
             case "poison":
-                if (!poisonAssigned && !poison.gameObject.GetComponent<PreacherController>().busy)
+                if (!poisonAssigned && !poison.gameObject.GetComponent<PoisonController>().busy)
                 {
                     poisonAssigned = true;
                     StartCoroutine(Wait("poison", 3f));

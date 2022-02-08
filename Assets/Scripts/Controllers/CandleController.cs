@@ -10,6 +10,8 @@ public class CandleController : MonoBehaviour
     public GameObject candle;
     public GameObject flame;
 
+    public AudioSource sfx;
+
     private void Start()
     {
         candleGeneral.GetComponent<ActionsGeneralController>().addActionToList(candle);
@@ -33,6 +35,7 @@ public class CandleController : MonoBehaviour
         var rand = new System.Random();
         int time = rand.Next(7, 13);
         flame.SetActive(true);
+        sfx.Play();
         yield return new WaitForSeconds(time);
         flame.SetActive(false);
         //Debug.Log("Vela apagada");
