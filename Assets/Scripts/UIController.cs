@@ -310,6 +310,7 @@ public class UIController : MonoBehaviour
         controlsBG.transform.GetChild(0).gameObject.SetActive(false);
         cameraMovement.SetBool("ControlsZoom", false);
         yield return new WaitForSeconds(3f);
+        logo.SetActive(true);
         StartCoroutine("ActivateMainMenu");
     }
 
@@ -339,13 +340,14 @@ public class UIController : MonoBehaviour
     public IEnumerator HideCredits()
     {
 
+        isInCredits = false;
         pressAnyText.SetActive(false);
         creditsBG.GetComponent<Animator>().SetBool("hide", true);
         creditsBG.SetActive(false);
         creditsBG.transform.GetChild(0).gameObject.SetActive(false);
         cameraMovement.SetBool("CreditsZoom", false);
         yield return new WaitForSeconds(3f);
-        isInCredits = false;
+        logo.SetActive(true);
         StartCoroutine("ActivateMainMenu");
     }
 
