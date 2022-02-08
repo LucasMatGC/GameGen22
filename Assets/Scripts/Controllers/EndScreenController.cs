@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndScreenController : MonoBehaviour
 {
+    public GameObject mainCanvas;
     public GameObject[] optionButtons;
     public GameObject[] answerButtons;
     public GameObject confirmCanvas;
@@ -13,10 +15,12 @@ public class EndScreenController : MonoBehaviour
     public GameObject[] confirmButtons;
     public GameObject fadeOut;
     public GameObject finalCanvas;
+    public GameObject scoreText;
     public GameObject finalText;
     
     private string[] unorderedAnswers = {"Sweep", "Light a candle", "Pray", "Touch the altar", "Speak with cultmaster", "Read a book", "Improve potion"};
-    private List<string> correctAnswers = new List<string>();
+    private PlayerStats playerStats;
+    private List<string> correctAnswers;
     private string tempStr;
     private List<string> pickedAnswers = new List<string>();
     private string flairTextWaitForAnswer = "Those 3 tasks were:";
@@ -25,6 +29,9 @@ public class EndScreenController : MonoBehaviour
 
     private void Start(){
         //GET CORRECT ANSWERS LIST HERE
+        playerStats = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
+        correctAnswers = new List<string>(playerStats.MandatoryTasks());
+
         correctAnswers.Add("Sweep");
         correctAnswers.Add("Pray");
         correctAnswers.Add("Light a candle");
@@ -33,11 +40,11 @@ public class EndScreenController : MonoBehaviour
         for (int i = 0; i < optionButtons.Length; i++){
             optionButtons[i].transform.GetChild(0).GetComponent<Text>().text = unorderedAnswers[i];
         }
-        //StartCoroutine(waitForFlairText());
+        StartCoroutine(waitForFlairText());
     }
 
     private IEnumerator waitForFlairText(){
-        yield return new WaitForSeconds(25f);
+        yield return new WaitForSeconds(23f);
         for (int i = 0; i < optionButtons.Length; i++){
             optionButtons[i].SetActive(true);
         }
@@ -131,8 +138,36 @@ public class EndScreenController : MonoBehaviour
     private IEnumerator FinalMessage(){
         yield return new WaitForSeconds(1f);
 
+        fadeOut.GetComponent<Animator>().SetBool("fadeOut", true);
         finalCanvas.SetActive(true);
+        mainCanvas.SetActive(false);
+        confirmCanvas.SetActive(false);
 
-        finalText.GetComponent<Text>().text = finalScore.ToString();
+        scoreText.GetComponent<Text>().text = "You got " + finalScore.ToString() + " rules right";
+        string finalMessage = "";
+
+        switch(finalScore){
+            case 0:
+                finalMessage = "You couldn't remember a single rule. How you survived that long in the cult without them noticing is a mystery, even to you.;However, your hazy memory and the wrong data you've spread around will keep the cult protected.;Waiting... For its new victim...";
+                break;
+            case 3:
+                finalMessage = "You stayed within the cult long enough to gather all the vital data you needed.;Your report to the local newspapers helped the authorities identify and shut the cult down.;Good job!";
+                break;
+            default:
+                finalMessage = "You barely stayed long enough to gather what data you could find and leave the cult unscathed.;Your vague report was not precise enough to help the authorities fight the cult, but at least you're sure you've helped some poor sod.;You can't seem to stop feeling like you're being watched, though...";
+                break;
+        }
+
+        finalText.GetComponent<TextWriter>().m_text = finalMessage;
+
+        StartCoroutine(RestartGame());
+    }
+
+    private IEnumerator RestartGame(){
+        yield return new WaitForSeconds(30f);
+        fadeOut.SetActive(true);
+        fadeOut.GetComponent<Animator>().SetBool("fadeOut", true);
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("MainMenu"/*, LoadSceneMode.Single*/);
     }
 }
